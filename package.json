@@ -1,6 +1,6 @@
 {
   "name": "nscm",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "The NodeSource Certified Modules command line utility",
   "bin": {
     "nscm": "./bin/nscm.js",
@@ -34,7 +34,7 @@
     "debug": "^2.6.1",
     "inquirer": "^3.0.1",
     "mkpath": "^1.0.0",
-    "client-request": "^1.2.0",
+    "request": "^2.2.5",
     "rimraf": "^2.6.0",
     "semver": "^5.3.0",
     "uuid": "^3.0.1"
