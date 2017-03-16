@@ -6,6 +6,7 @@ const Table = require('cli-table')
 const inquirer = require('inquirer')
 const eachLimit = require('async.eachlimit')
 const request = require('client-request')
+const encodeQuery = require('querystring').encode
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
@@ -142,10 +143,8 @@ function deletePackage (opts, callback) {
   const pkg = tools.splitPackage(opts.package)
 
   request({
-    uri: url.resolve(opts.registry, '/api/v1/whitelist'),
-    qs: pkg,
+    uri: url.resolve(opts.registry, '/api/v1/whitelist?' + encodeQuery(pkg)),
     method: 'DELETE',
-    followAllRedirects: true,
     headers: {
       'Authorization': `Bearer ${opts.token}`
     }
