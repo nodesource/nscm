@@ -1,7 +1,7 @@
 {
   "name": "nscm",
   "version": "1.0.0",
-  "description": "NodeSource Certified Modules whitelist tool",
+  "description": "The NodeSource Certified Modules command line utility",
   "bin": {
     "nscm": "./bin/nscm.js",
     "nscm-whitelist": "./bin/nscm-whitelist.js",
