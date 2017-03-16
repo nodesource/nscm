@@ -1,0 +1,19 @@
+[
+  {
+    "scope": "https://id.registry.nodesource.test:443",
+    "method": "POST",
+    "path": "/api/v1/whitelist",
+    "body": {
+      "name": "gpl-2.0",
+      "version": "1.0.0",
+      "from": ">=1.0.0 <2.0.0",
+      "score": 0
+    },
+    "status": 200,
+    "response": {
+      "name": "gpl-2.0",
+      "version": "1.0.0",
+      "from": ">=1.0.0 <2.0.0"
+    }
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "name": "nscm",
+  "version": "1.0.0",
+  "description": "NodeSource Certified Modules whitelist tool",
+  "bin": {
+    "nscm": "./bin/nscm.js",
+    "nscm-whitelist": "./bin/nscm-whitelist.js",
+    "nscm-config": "./bin/nscm-config.js"
+  },
+  "scripts": {
+    "test": "nyc tape tests/*-test.js | tap-spec",
+    "coverage": "nyc report",
+    "lint": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nodesource/nscm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nodesource/nscm/issues"
+  },
+  "homepage": "https://github.com/nodesource/nscm",
+  "keywords": [],
+  "author": "NodeSource Inc. <npm@nodesource.com>",
+  "license": "MIT",
+  "dependencies": {
+    "args": "^2.3.0",
+    "async": "^2.1.5",
+    "chalk": "^1.1.3",
+    "cli-table": "~0.3.1",
+    "configstore": "^3.0.0",
+    "cpr": "^2.0.2",
+    "debug": "^2.6.1",
+    "inquirer": "^3.0.1",
+    "mkdirp": "^0.5.1",
+    "request": "^2.79.0",
+    "rimraf": "^2.6.0",
+    "semver": "^5.3.0",
+    "uuid": "^3.0.1"
+  },
+  "devDependencies": {
+    "nock": "^9.0.7",
+    "nyc": "^10.1.2",
+    "proxyquire": "^1.7.11",
+    "standard": "^9.0.1",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.6.3"
+  }
+}
