@@ -4,8 +4,9 @@ const debug = require('debug')('nscm:whitelist')
 const url = require('url')
 const Table = require('cli-table')
 const inquirer = require('inquirer')
-const async = require('async')
-const request = require('request')
+const eachLimit = require('async.eachlimit')
+const request = require('client-request')
+const encodeQuery = require('querystring').encode
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
@@ -69,7 +70,7 @@ function addWhitelist (opts, callback) {
   const isCallback = typeof callback === 'function'
 
   let success = []
-  async.eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
+  eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
     debug(`adding ${pkg.name} to the whitelist`)
     request({
       uri: url.resolve(opts.registry, '/api/v1/whitelist'),
@@ -142,10 +143,8 @@ function deletePackage (opts, callback) {
   const pkg = tools.splitPackage(opts.package)
 
   request({
-    uri: url.resolve(opts.registry, '/api/v1/whitelist'),
-    qs: pkg,
+    uri: url.resolve(opts.registry, '/api/v1/whitelist?' + encodeQuery(pkg)),
     method: 'DELETE',
-    followAllRedirects: true,
     headers: {
       'Authorization': `Bearer ${opts.token}`
     }
@@ -271,7 +270,7 @@ function reset (name, sub, opts, callback) {
           return
         }
 
-        async.eachLimit(whitelist, opts.concurrency, (pkg, next) => {
+        eachLimit(whitelist, opts.concurrency, (pkg, next) => {
           deletePackage(Object.assign(opts, { package: `${pkg.name}@${pkg.version}` }), next)
         }, err => {
           if (err) {
