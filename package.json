@@ -30,7 +30,6 @@
     "chalk": "^1.1.3",
     "cli-table": "~0.3.1",
     "configstore": "^3.0.0",
-    "cpr": "^2.0.2",
     "debug": "^2.6.1",
     "inquirer": "^3.0.1",
     "mkpath": "^1.0.0",

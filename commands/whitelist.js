@@ -73,7 +73,7 @@ function addWhitelist (opts, callback) {
   eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
     debug(`adding ${pkg.name} to the whitelist`)
     request({
-      uri: url.resolve(opts.registry, '/api/v1/whitelist'),
+      url: url.resolve(opts.registry, '/api/v1/whitelist'),
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${opts.token}`
@@ -93,7 +93,7 @@ function addWhitelist (opts, callback) {
         return next(new Error(`can't add ${pkg.name} to whitelist`))
       }
 
-      success.push(pkg)
+      success.push(body)
       next()
     })
   }, err => {

@@ -1,6 +1,6 @@
 [
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=acorn&version=4.0.11",
     "body": "",
@@ -182,7 +182,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=gpl-2.0&version=1.0.0",
     "body": "",
@@ -349,7 +349,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=isarray&version=2.0.1",
     "body": "",
@@ -534,7 +534,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=tape&version=4.6.3",
     "body": "",
@@ -758,7 +758,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=deep-equal&version=1.0.1",
     "body": "",
@@ -943,7 +943,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=defined&version=1.0.0",
     "body": "",
@@ -1131,7 +1131,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=for-each&version=0.3.2",
     "body": "",
@@ -1314,7 +1314,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=is-function&version=1.0.1",
     "body": "",
@@ -1499,7 +1499,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=function-bind&version=1.1.0",
     "body": "",
@@ -1686,7 +1686,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=glob&version=7.1.1",
     "body": "",
@@ -1879,7 +1879,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=fs.realpath&version=1.0.0",
     "body": "",
@@ -2064,7 +2064,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=inflight&version=1.0.6",
     "body": "",
@@ -2251,7 +2251,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=wrappy&version=1.0.2",
     "body": "",
@@ -2433,7 +2433,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=minimatch&version=3.0.3",
     "body": "",
@@ -2618,7 +2618,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=brace-expansion&version=1.1.6",
     "body": "",
@@ -2803,7 +2803,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=balanced-match&version=0.4.2",
     "body": "",
@@ -2990,7 +2990,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=concat-map&version=0.0.1",
     "body": "",
@@ -3177,7 +3177,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=once&version=1.4.0",
     "body": "",
@@ -3365,7 +3365,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=path-is-absolute&version=1.0.1",
     "body": "",
@@ -3564,7 +3564,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=has&version=1.0.1",
     "body": "",
@@ -3747,7 +3747,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=inherits&version=2.0.3",
     "body": "",
@@ -3937,7 +3937,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=minimist&version=1.2.0",
     "body": "",
@@ -4123,7 +4123,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=object-inspect&version=1.2.1",
     "body": "",
@@ -4311,7 +4311,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=resolve&version=1.1.7",
     "body": "",
@@ -4498,7 +4498,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=resumer&version=0.0.0",
     "body": "",
@@ -4686,7 +4686,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=string.prototype.trim&version=1.1.2",
     "body": "",
@@ -4870,7 +4870,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=define-properties&version=1.1.2",
     "body": "",
@@ -5062,7 +5062,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=foreach&version=2.0.5",
     "body": "",
@@ -5249,7 +5249,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=object-keys&version=1.0.11",
     "body": "",
@@ -5435,7 +5435,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=es-abstract&version=1.7.0",
     "body": "",
@@ -5617,7 +5617,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=es-to-primitive&version=1.1.1",
     "body": "",
@@ -5796,7 +5796,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=is-date-object&version=1.0.1",
     "body": "",
@@ -5983,7 +5983,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=is-symbol&version=1.0.1",
     "body": "",
@@ -6169,7 +6169,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=is-callable&version=1.1.3",
     "body": "",
@@ -6345,7 +6345,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=is-regex&version=1.0.4",
     "body": "",
@@ -6520,7 +6520,7 @@
     ]
   },
   {
-    "scope": "https://registry.nodesource.test:443",
+    "scope": "https://id.registry.nodesource.test:443",
     "method": "GET",
     "path": "/api/v1/package?name=through&version=2.3.8",
     "body": "",

@@ -1,0 +1,200 @@
+[
+  {
+    "scope": "https://id.registry.nodesource.test:443",
+    "method": "GET",
+    "path": "/api/v1/package?name=gpl-2.0&version=1.0.0",
+    "body": "",
+    "status": 200,
+    "response": {
+      "name": "gpl-2.0",
+      "version": "1.0.0",
+      "description": "Plaintext of The GNU General Public License Version 2 from www.fsf.org",
+      "keywords": [],
+      "readme": "Plaintext of The GNU General Public License Version 2 from www.fsf.org\n\nThe package exports a string with Unix-style line breaks.\n",
+      "author": "kemitchell",
+      "maintainers": [
+        "kemitchell"
+      ],
+      "score": 0,
+      "results": {
+        "critical": [
+          {
+            "name": "license",
+            "tests": [
+              [
+                "package",
+                false,
+                "unknown"
+              ],
+              [
+                "dependencies",
+                false,
+                "GPL-2.0@1.0.0"
+              ]
+            ]
+          }
+        ],
+       "major": [
+          {
+            "name": "security",
+            "tests": [
+              [
+                "vulnerabilities",
+                true,
+                "0"
+              ]
+            ]
+          }
+        ],
+        "minor": [
+          {
+            "name": "readme",
+            "tests": [
+              [
+                "readme exists",
+                1,
+                "README.md"
+              ],
+              [
+                "readme > 300 characters",
+                false,
+                130
+              ]
+            ]
+          },
+          {
+            "name": "public source control",
+            "tests": [
+              [
+                "has matching tag",
+                true,
+                "v1.0.0"
+              ]
+            ]
+          },
+          {
+            "name": "disk usage",
+            "tests": [
+              [
+                "bytes used less than 26214400",
+                true,
+                260
+              ]
+            ]
+          }
+        ],
+        "bonus": []
+      },
+      "times": {
+        "certified": "2017-02-15T14:42:08.030Z",
+        "published": "2016-01-29T07:17:46.496Z"
+      },
+      "dependencyCount": 0,
+      "downloadCount": 2,
+      "dependencyList": [
+        "GPL-2.0@1.0.0"
+      ],
+      "raw_results": {
+        "license": {
+          "name": "license",
+          "tests": [
+            [
+              "package",
+              false,
+              "unknown"
+            ],
+            [
+              "dependencies",
+              false,
+              "GPL-2.0@1.0.0"
+            ]
+          ]
+        },
+        "security": {
+          "name": "security",
+          "tests": [
+            [
+              "vulnerabilities",
+              true,
+              "0"
+            ]
+          ]
+        },
+        "readme": {
+          "name": "readme",
+          "tests": [
+            [
+              "readme exists",
+              1,
+              "README.md"
+            ],
+            [
+              "readme > 300 characters",
+              false,
+              130
+            ]
+          ]
+        },
+        "scm": {
+          "name": "public source control",
+          "tests": [
+            [
+              "has matching tag",
+              true,
+              "v1.0.0"
+            ]
+          ]
+        },
+        "disk-usage": {
+          "name": "disk usage",
+          "tests": [
+            [
+              "bytes used less than 26214400",
+              true,
+              260
+            ]
+          ]
+        }
+      }
+    },
+    "rawHeaders": [
+      "date",
+      "Thu, 16 Mar 2017 22:53:22 GMT",
+      "Content-Length",
+      "1437",
+      "Connection",
+      "Close"
+    ]
+  },
+  {
+    "scope": "https://id.registry.nodesource.test:443",
+    "method": "POST",
+    "path": "/api/v1/whitelist",
+    "body": {
+      "name": "gpl-2.0",
+      "version": "1.0.0",
+      "from": ">=1.0.0 <2.0.0",
+      "score": 0
+    },
+    "status": 200,
+    "response": {
+      "name": "gpl-2.0",
+      "version": "1.0.0",
+      "from": ">=1.0.0 <2.0.0"
+    },
+    "rawHeaders": [
+      "Content-Type",
+      "application/json; charset=utf-8",
+      "Date",
+      "Thu, 16 Mar 2017 22:53:22 GMT",
+      "ETag",
+      "W/\"3c-BfeCw1B2j2T/C+3s3gRbWk2IJ0I\"",
+      "Vary",
+      "Accept-Encoding",
+      "Content-Length",
+      "60",
+      "Connection",
+      "Close"
+    ]
+  }
+]

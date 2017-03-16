@@ -46,17 +46,10 @@ test('whitelist add', t => {
   const pkg = {
     name: 'gpl-2.0',
     version: '1.0.0',
-    from: '>=1.0.0 <2.0.0',
-    score: 0
+    from: '>=1.0.0 <2.0.0'
   }
 
-  nock(opts.registry, { 'encodedQueryParams': true })
-   .get('/api/v1/packages/gpl-2.0')
-   .reply(200, pkg)
-   .post('/api/v1/whitelist', pkg)
-   .reply(200, {
-     result: 'success'
-   })
+  nock.load(path.join(__dirname, 'fixtures', 'whitelist-add-nock.json'))
 
   whitelist.add(['add', 'a'], ['gpl-2.0@latest'], opts, (err, output) => {
     t.ifErr(err, 'it should not fail')
@@ -81,9 +74,7 @@ test('whitelist delete isarray (success)', t => {
 })
 
 test('whitelist list', t => {
-  nock(opts.registry)
-    .get('/api/v1/whitelist')
-    .reply(200, expected)
+  nock.load(path.join(__dirname, 'fixtures', 'whitelist-list-nock.json'))
 
   whitelist.list(['list', 'r'], [], opts, (err, output) => {
     t.ifErr(err, 'it should not fail')
