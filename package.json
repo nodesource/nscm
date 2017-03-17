@@ -1,6 +1,6 @@
 {
   "name": "nscm",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "The NodeSource Certified Modules command line utility",
   "bin": {
     "nscm": "./bin/nscm.js",
@@ -24,19 +24,19 @@
   "author": "NodeSource Inc. <npm@nodesource.com>",
   "license": "MIT",
   "dependencies": {
-    "args": "^2.3.0",
-    "async.eachlimit": "^0.5.2",
-    "async.maplimit": "^0.5.2",
-    "chalk": "^1.1.3",
+    "args": "~2.3.0",
+    "async.eachlimit": "~0.5.2",
+    "async.maplimit": "~0.5.2",
+    "chalk": "~1.1.3",
     "cli-table": "~0.3.1",
     "configstore": "^3.0.0",
-    "debug": "^2.6.1",
+    "debug": "~2.6.1",
     "inquirer": "^3.0.1",
-    "mkpath": "^1.0.0",
-    "request": "^2.2.5",
-    "rimraf": "^2.6.0",
-    "semver": "^5.3.0",
-    "uuid": "^3.0.1"
+    "mkpath": "~1.0.0",
+    "request": "2.2.5",
+    "rimraf": "~2.6.0",
+    "semver": "~5.3.0",
+    "uuid": "~3.0.1"
   },
   "devDependencies": {
     "nock": "^9.0.7",
