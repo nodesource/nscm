@@ -24,6 +24,8 @@ args
   .option('production', 'Only check production', false)
   .option('concurrency', 'Concurrency of requests', config.defaults.concurrency, parseInt)
   .option('json', 'Formats the report in JSON', false)
+  .option('dot', 'Formats the report in Graphiz dot', false)
+  .option('svg', 'Formats the report in SVG', false)
   .command('report', 'Get a report of your packages', report, ['r'])
   .command('whitelist', 'Whitelist your packages', ['w'])
   .command('config', 'Configure nscm options', ['c'])

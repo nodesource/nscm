@@ -1,0 +1,340 @@
+digraph g {
+    graph [
+        rankdir = "LR"
+        tooltip = "fixture @ 1.0.0"
+    ]
+
+    "fixture@1.0.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#CFCFCF",
+        URL = "https://platform.nodesource.io/registry?name=fixture&version=1.0.0",
+        tooltip = "fixture @ 1.0.0 - score: no score available",
+        label = <<font point-size="20">fixture</font><br align='left'/>1.0.0<br align='left'/>score: no score available<br align='left'/>>,
+    ]
+    "acorn@4.0.11" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=acorn&version=4.0.11",
+        tooltip = "acorn @ 4.0.11 - score: 100%",
+        label = <<font point-size="20">acorn</font><br align='left'/>4.0.11<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "gpl-2.0@1.0.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#FF9F9F",
+        URL = "https://platform.nodesource.io/registry?name=gpl-2.0&version=1.0.0",
+        tooltip = "gpl-2.0 @ 1.0.0 - score: 0%",
+        label = <<font point-size="20">gpl-2.0</font><br align='left'/>1.0.0<br align='left'/>score: 0%<br align='left'/>>,
+    ]
+    "isarray@2.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=isarray&version=2.0.1",
+        tooltip = "isarray @ 2.0.1 - score: 100%",
+        label = <<font point-size="20">isarray</font><br align='left'/>2.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "tape@4.6.3" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=tape&version=4.6.3",
+        tooltip = "tape @ 4.6.3 - score: 100%",
+        label = <<font point-size="20">tape</font><br align='left'/>4.6.3<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "deep-equal@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=deep-equal&version=1.0.1",
+        tooltip = "deep-equal @ 1.0.1 - score: 100%",
+        label = <<font point-size="20">deep-equal</font><br align='left'/>1.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "defined@1.0.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=defined&version=1.0.0",
+        tooltip = "defined @ 1.0.0 - score: 100%",
+        label = <<font point-size="20">defined</font><br align='left'/>1.0.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "for-each@0.3.2" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=for-each&version=0.3.2",
+        tooltip = "for-each @ 0.3.2 - score: 100%",
+        label = <<font point-size="20">for-each</font><br align='left'/>0.3.2<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "is-function@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=is-function&version=1.0.1",
+        tooltip = "is-function @ 1.0.1 - score: 100%",
+        label = <<font point-size="20">is-function</font><br align='left'/>1.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "function-bind@1.1.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=function-bind&version=1.1.0",
+        tooltip = "function-bind @ 1.1.0 - score: 100%",
+        label = <<font point-size="20">function-bind</font><br align='left'/>1.1.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "glob@7.1.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=glob&version=7.1.1",
+        tooltip = "glob @ 7.1.1 - score: 100%",
+        label = <<font point-size="20">glob</font><br align='left'/>7.1.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "fs.realpath@1.0.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=fs.realpath&version=1.0.0",
+        tooltip = "fs.realpath @ 1.0.0 - score: 100%",
+        label = <<font point-size="20">fs.realpath</font><br align='left'/>1.0.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "inflight@1.0.6" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=inflight&version=1.0.6",
+        tooltip = "inflight @ 1.0.6 - score: 100%",
+        label = <<font point-size="20">inflight</font><br align='left'/>1.0.6<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "wrappy@1.0.2" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=wrappy&version=1.0.2",
+        tooltip = "wrappy @ 1.0.2 - score: 100%",
+        label = <<font point-size="20">wrappy</font><br align='left'/>1.0.2<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "minimatch@3.0.3" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=minimatch&version=3.0.3",
+        tooltip = "minimatch @ 3.0.3 - score: 100%",
+        label = <<font point-size="20">minimatch</font><br align='left'/>3.0.3<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "brace-expansion@1.1.6" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=brace-expansion&version=1.1.6",
+        tooltip = "brace-expansion @ 1.1.6 - score: 100%",
+        label = <<font point-size="20">brace-expansion</font><br align='left'/>1.1.6<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "balanced-match@0.4.2" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=balanced-match&version=0.4.2",
+        tooltip = "balanced-match @ 0.4.2 - score: 100%",
+        label = <<font point-size="20">balanced-match</font><br align='left'/>0.4.2<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "concat-map@0.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=concat-map&version=0.0.1",
+        tooltip = "concat-map @ 0.0.1 - score: 100%",
+        label = <<font point-size="20">concat-map</font><br align='left'/>0.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "once@1.4.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=once&version=1.4.0",
+        tooltip = "once @ 1.4.0 - score: 100%",
+        label = <<font point-size="20">once</font><br align='left'/>1.4.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "path-is-absolute@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=path-is-absolute&version=1.0.1",
+        tooltip = "path-is-absolute @ 1.0.1 - score: 100%",
+        label = <<font point-size="20">path-is-absolute</font><br align='left'/>1.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "has@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#FFFF7F",
+        URL = "https://platform.nodesource.io/registry?name=has&version=1.0.1",
+        tooltip = "has @ 1.0.1 - score: 93%",
+        label = <<font point-size="20">has</font><br align='left'/>1.0.1<br align='left'/>score: 93%<br align='left'/>>,
+    ]
+    "inherits@2.0.3" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=inherits&version=2.0.3",
+        tooltip = "inherits @ 2.0.3 - score: 100%",
+        label = <<font point-size="20">inherits</font><br align='left'/>2.0.3<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "minimist@1.2.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=minimist&version=1.2.0",
+        tooltip = "minimist @ 1.2.0 - score: 100%",
+        label = <<font point-size="20">minimist</font><br align='left'/>1.2.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "object-inspect@1.2.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=object-inspect&version=1.2.1",
+        tooltip = "object-inspect @ 1.2.1 - score: 100%",
+        label = <<font point-size="20">object-inspect</font><br align='left'/>1.2.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "resolve@1.1.7" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=resolve&version=1.1.7",
+        tooltip = "resolve @ 1.1.7 - score: 100%",
+        label = <<font point-size="20">resolve</font><br align='left'/>1.1.7<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "resumer@0.0.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=resumer&version=0.0.0",
+        tooltip = "resumer @ 0.0.0 - score: 100%",
+        label = <<font point-size="20">resumer</font><br align='left'/>0.0.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "string.prototype.trim@1.1.2" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=string.prototype.trim&version=1.1.2",
+        tooltip = "string.prototype.trim @ 1.1.2 - score: 100%",
+        label = <<font point-size="20">string.prototype.trim</font><br align='left'/>1.1.2<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "define-properties@1.1.2" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=define-properties&version=1.1.2",
+        tooltip = "define-properties @ 1.1.2 - score: 100%",
+        label = <<font point-size="20">define-properties</font><br align='left'/>1.1.2<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "foreach@2.0.5" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=foreach&version=2.0.5",
+        tooltip = "foreach @ 2.0.5 - score: 100%",
+        label = <<font point-size="20">foreach</font><br align='left'/>2.0.5<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "object-keys@1.0.11" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=object-keys&version=1.0.11",
+        tooltip = "object-keys @ 1.0.11 - score: 100%",
+        label = <<font point-size="20">object-keys</font><br align='left'/>1.0.11<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "es-abstract@1.7.0" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=es-abstract&version=1.7.0",
+        tooltip = "es-abstract @ 1.7.0 - score: 100%",
+        label = <<font point-size="20">es-abstract</font><br align='left'/>1.7.0<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "es-to-primitive@1.1.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=es-to-primitive&version=1.1.1",
+        tooltip = "es-to-primitive @ 1.1.1 - score: 100%",
+        label = <<font point-size="20">es-to-primitive</font><br align='left'/>1.1.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "is-date-object@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=is-date-object&version=1.0.1",
+        tooltip = "is-date-object @ 1.0.1 - score: 100%",
+        label = <<font point-size="20">is-date-object</font><br align='left'/>1.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "is-symbol@1.0.1" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=is-symbol&version=1.0.1",
+        tooltip = "is-symbol @ 1.0.1 - score: 100%",
+        label = <<font point-size="20">is-symbol</font><br align='left'/>1.0.1<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "is-callable@1.1.3" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=is-callable&version=1.1.3",
+        tooltip = "is-callable @ 1.1.3 - score: 100%",
+        label = <<font point-size="20">is-callable</font><br align='left'/>1.1.3<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "is-regex@1.0.4" [
+        shape = box,
+        style = filled,
+        fillcolor = "#9FFF9F",
+        URL = "https://platform.nodesource.io/registry?name=is-regex&version=1.0.4",
+        tooltip = "is-regex @ 1.0.4 - score: 100%",
+        label = <<font point-size="20">is-regex</font><br align='left'/>1.0.4<br align='left'/>score: 100%<br align='left'/>>,
+    ]
+    "through@2.3.8" [
+        shape = box,
+        style = filled,
+        fillcolor = "#FFFF7F",
+        URL = "https://platform.nodesource.io/registry?name=through&version=2.3.8",
+        tooltip = "through @ 2.3.8 - score: 93%",
+        label = <<font point-size="20">through</font><br align='left'/>2.3.8<br align='left'/>score: 93%<br align='left'/>>,
+    ]
+
+    "fixture@1.0.0" -> "acorn@4.0.11"
+    "fixture@1.0.0" -> "gpl-2.0@1.0.0"
+    "fixture@1.0.0" -> "isarray@2.0.1"
+    "fixture@1.0.0" -> "tape@4.6.3"
+    "tape@4.6.3" -> "deep-equal@1.0.1"
+    "tape@4.6.3" -> "defined@1.0.0"
+    "tape@4.6.3" -> "for-each@0.3.2"
+    "tape@4.6.3" -> "function-bind@1.1.0"
+    "tape@4.6.3" -> "glob@7.1.1"
+    "tape@4.6.3" -> "has@1.0.1"
+    "tape@4.6.3" -> "inherits@2.0.3"
+    "tape@4.6.3" -> "minimist@1.2.0"
+    "tape@4.6.3" -> "object-inspect@1.2.1"
+    "tape@4.6.3" -> "resolve@1.1.7"
+    "tape@4.6.3" -> "resumer@0.0.0"
+    "tape@4.6.3" -> "string.prototype.trim@1.1.2"
+    "tape@4.6.3" -> "through@2.3.8"
+    "for-each@0.3.2" -> "is-function@1.0.1"
+    "glob@7.1.1" -> "fs.realpath@1.0.0"
+    "glob@7.1.1" -> "inflight@1.0.6"
+    "glob@7.1.1" -> "minimatch@3.0.3"
+    "glob@7.1.1" -> "once@1.4.0"
+    "glob@7.1.1" -> "path-is-absolute@1.0.1"
+    "inflight@1.0.6" -> "wrappy@1.0.2"
+    "minimatch@3.0.3" -> "brace-expansion@1.1.6"
+    "brace-expansion@1.1.6" -> "balanced-match@0.4.2"
+    "brace-expansion@1.1.6" -> "concat-map@0.0.1"
+    "string.prototype.trim@1.1.2" -> "define-properties@1.1.2"
+    "string.prototype.trim@1.1.2" -> "es-abstract@1.7.0"
+    "define-properties@1.1.2" -> "foreach@2.0.5"
+    "define-properties@1.1.2" -> "object-keys@1.0.11"
+    "es-abstract@1.7.0" -> "es-to-primitive@1.1.1"
+    "es-abstract@1.7.0" -> "is-callable@1.1.3"
+    "es-abstract@1.7.0" -> "is-regex@1.0.4"
+    "es-to-primitive@1.1.1" -> "is-date-object@1.0.1"
+    "es-to-primitive@1.1.1" -> "is-symbol@1.0.1"
+}
