@@ -44,7 +44,7 @@ function generateReport (opts, callback) {
           table.push([
             results[i].name,
             results[i].version,
-            results[i].score || ''
+            results[i].score || 0
           ])
         }
       }

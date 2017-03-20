@@ -415,7 +415,7 @@ function formatOutput (opts) {
     table.push([
       opts.packages[i].name,
       opts.packages[i].version,
-      opts.packages[i].score || ''
+      opts.packages[i].score || 0
     ])
   }
   const output = (opts.json) ? JSON.stringify(opts.packages, null, 2) : table.toString()
