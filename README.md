@@ -30,6 +30,8 @@ Usage: nscm [command] [options]
     -c, --concurrency <n>  Concurrency of requests (defaults to 15)
     -h, --help             Output usage information
     -j, --json             Formats the report in JSON (disabled by default)
+    -s, --svg              Formats the report in SVG (disabled by default)
+    -d, --dot              Formats the report in Graphviz DOT (disabled by default)
     -p, --production       Only check production (disabled by default)
     -r, --registry         Certified modules registry (defaults to "")
     -t, --token            Token for registry authentication (defaults to "")
@@ -64,7 +66,12 @@ please wait while we process the information
 ├────────────────────────────────────┼───────────────┼────────┤
 ```
 
-You can also pass `--json` to return the report in JSON format or `--production` to return only `dependencies` and not `devDependencies`.
+You can also pass `--json` to return the report in JSON format,
+`--svg` to return the report in SVG format, or
+`--dot` to return the report in [Graphviz][] DOT format.
+Use `--production` to return only `dependencies` and not `devDependencies`.
+
+[Graphviz]: http://www.graphviz.org/
 
 ```
 $ nscm report --production --json

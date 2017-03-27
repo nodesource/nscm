@@ -36,7 +36,8 @@
     "request": "2.2.5",
     "rimraf": "~2.6.0",
     "semver": "~5.3.0",
-    "uuid": "~3.0.1"
+    "uuid": "~3.0.1",
+    "viz.js": "~1.7.0"
   },
   "devDependencies": {
     "nock": "^9.0.7",

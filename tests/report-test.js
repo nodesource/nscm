@@ -1,5 +1,7 @@
 'use strict'
 
+const fs = require('fs')
+
 const test = require('tape')
 const path = require('path')
 const nock = require('nock')
@@ -14,18 +16,45 @@ const tools = {
 const report = proxyquire('../commands/report', {
   '../lib/tools': tools
 })
-const expected = require('./fixtures/report')
 
-const opts = {
-  concurrency: 15,
-  token: 'test-token',
-  registry: 'https://id.registry.nodesource.test',
-  publicRegistry: 'https://registry.nodesource.test',
-  json: true,
-  cwd: path.join(__dirname, 'fixtures')
-}
+test('nscm report - txt', t => {
+  const expected = fs.readFileSync(`${__dirname}/fixtures/expected/report.txt`, 'utf8')
 
-test('nscm report', t => {
+  const opts = {
+    concurrency: 15,
+    token: 'test-token',
+    registry: 'https://id.registry.nodesource.test',
+    publicRegistry: 'https://registry.nodesource.test',
+    cwd: path.join(__dirname, 'fixtures')
+  }
+
+  // mock registry server
+  nock.load(path.join(__dirname, 'fixtures', 'report-nock.json'))
+
+  report(['report', 'r'], [], opts, (err, output) => {
+    t.ifErr(err, 'it should not fail')
+    t.equal(expected.trim(), output, 'report should be the same')
+    t.end()
+
+    // if not as expected, write output to manually diff/copy
+    if (expected.trim() !== output) {
+      fs.writeFileSync(`${__dirname}/fixtures/expected/actual.report.txt`, output)
+    }
+  })
+})
+
+test('nscm report - json', t => {
+  const expected = require('./fixtures/expected/report.json')
+
+  const opts = {
+    concurrency: 15,
+    token: 'test-token',
+    registry: 'https://id.registry.nodesource.test',
+    publicRegistry: 'https://registry.nodesource.test',
+    json: true,
+    cwd: path.join(__dirname, 'fixtures')
+  }
+
   // mock registry server
   nock.load(path.join(__dirname, 'fixtures', 'report-nock.json'))
 
@@ -33,5 +62,64 @@ test('nscm report', t => {
     t.ifErr(err, 'it should not fail')
     t.equal(JSON.stringify(expected), JSON.stringify(output), 'report should be the same')
     t.end()
+
+    // if not as expected, write output to manually diff/copy
+    if (JSON.stringify(expected) !== JSON.stringify(output)) {
+      fs.writeFileSync(`${__dirname}/fixtures/expected/actual.report.json`, JSON.stringify(output, null, 4))
+    }
+  })
+})
+
+test('nscm report - dot', t => {
+  const expected = fs.readFileSync(`${__dirname}/fixtures/expected/report.dot`, 'utf8')
+
+  const opts = {
+    concurrency: 15,
+    token: 'test-token',
+    registry: 'https://id.registry.nodesource.test',
+    publicRegistry: 'https://registry.nodesource.test',
+    dot: true,
+    cwd: path.join(__dirname, 'fixtures')
+  }
+
+  // mock registry server
+  nock.load(path.join(__dirname, 'fixtures', 'report-nock.json'))
+
+  report(['report', 'r'], [], opts, (err, output) => {
+    t.ifErr(err, 'it should not fail')
+    t.equal(expected, output, 'report should be the same')
+    t.end()
+
+    // if not as expected, write output to manually diff/copy
+    if (expected !== output) {
+      fs.writeFileSync(`${__dirname}/fixtures/expected/actual.report.dot`, output)
+    }
+  })
+})
+
+test('nscm report - svg', t => {
+  const expected = fs.readFileSync(`${__dirname}/fixtures/expected/report.svg`, 'utf8')
+
+  const opts = {
+    concurrency: 15,
+    token: 'test-token',
+    registry: 'https://id.registry.nodesource.test',
+    publicRegistry: 'https://registry.nodesource.test',
+    svg: true,
+    cwd: path.join(__dirname, 'fixtures')
+  }
+
+  // mock registry server
+  nock.load(path.join(__dirname, 'fixtures', 'report-nock.json'))
+
+  report(['report', 'r'], [], opts, (err, output) => {
+    t.ifErr(err, 'it should not fail')
+    t.equal(expected, output, 'report should be the same')
+    t.end()
+
+    // if not as expected, write output to manually diff/copy
+    if (expected !== output) {
+      fs.writeFileSync(`${__dirname}/fixtures/expected/actual.report.svg`, output)
+    }
   })
 })
