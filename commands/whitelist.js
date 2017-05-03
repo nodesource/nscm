@@ -1,7 +1,6 @@
 'use strict'
 
 const debug = require('debug')('nscm:whitelist')
-const url = require('url')
 const Table = require('cli-table')
 const inquirer = require('inquirer')
 const eachLimit = require('async.eachlimit')
@@ -73,7 +72,7 @@ function addWhitelist (opts, callback) {
   eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
     debug(`adding ${pkg.name} to the whitelist`)
     request({
-      url: url.resolve(opts.registry, '/api/v1/whitelist'),
+      url: `${opts.registry}/api/v1/whitelist`,
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${opts.token}`
@@ -143,7 +142,7 @@ function deletePackage (opts, callback) {
   const pkg = tools.splitPackage(opts.package)
 
   request({
-    uri: url.resolve(opts.registry, '/api/v1/whitelist?' + encodeQuery(pkg)),
+    url: `${opts.registry}/api/v1/whitelist?${encodeQuery(pkg)}`,
     method: 'DELETE',
     headers: {
       'Authorization': `Bearer ${opts.token}`
@@ -196,7 +195,7 @@ function list (name, sub, opts, callback) {
 function getWhitelist (opts, callback) {
   const isCallback = typeof callback === 'function'
   request({
-    uri: url.resolve(opts.registry, '/api/v1/whitelist'),
+    url: `${opts.registry}/api/v1/whitelist`,
     method: 'GET',
     headers: {
       'Authorization': `Bearer ${opts.token}`
