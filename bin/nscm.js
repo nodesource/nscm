@@ -16,7 +16,9 @@ const commands = [
   'whitelist',
   'config',
   'signin',
+  'login',
   'signout',
+  'logout',
   'r',
   'w',
   'c',
@@ -37,8 +39,8 @@ args
   .command('report', 'Get a report of your packages', report, ['r'])
   .command('whitelist', 'Whitelist your packages', ['w'])
   .command('config', 'Configure nscm options', ['c'])
-  .command('signin', 'Sign in to nscm', signin, ['s'])
-  .command('signout', 'Sign out of nscm', signout, ['o'])
+  .command('signin', 'Sign in to nscm', signin, ['s', 'login'])
+  .command('signout', 'Sign out of nscm', signout, ['o', 'logout'])
 
 const flags = args.parse(process.argv, {
   usageFilter: tools.usageFilter
