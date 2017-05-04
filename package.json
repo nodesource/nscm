@@ -1,6 +1,6 @@
 {
   "name": "nscm",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "The NodeSource Certified Modules command line utility",
   "bin": {
     "nscm": "./bin/nscm.js",
