@@ -8,14 +8,20 @@ const tools = require('../lib/tools')
 
 // Commands
 const report = require('../commands/report')
+const signin = require('../commands/signin')
+const signout = require('../commands/signout')
 
 const commands = [
   'report',
   'whitelist',
   'config',
+  'signin',
+  'signout',
   'r',
   'w',
-  'c'
+  'c',
+  's',
+  'o'
 ]
 
 args
@@ -26,9 +32,13 @@ args
   .option('json', 'Formats the report in JSON', false)
   .option('dot', 'Formats the report in Graphiz dot', false)
   .option('svg', 'Formats the report in SVG', false)
+  .option('github', 'Sign in using GitHub SSO', false)
+  .option('google', 'Sign in using Google SSO', false)
   .command('report', 'Get a report of your packages', report, ['r'])
   .command('whitelist', 'Whitelist your packages', ['w'])
   .command('config', 'Configure nscm options', ['c'])
+  .command('signin', 'Sign in to nscm', signin, ['s'])
+  .command('signout', 'Sign out of nscm', signout, ['o'])
 
 const flags = args.parse(process.argv, {
   usageFilter: tools.usageFilter

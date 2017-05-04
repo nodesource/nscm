@@ -86,7 +86,7 @@ function addWhitelist (opts, callback) {
       debug(res.statusCode, body)
 
       if (res.statusCode === 401) {
-        return next(new Error('authentication error, please run `npm login` or set a correct token'))
+        return next(new Error('authentication error, please run `nscm signin` or set a correct token'))
       }
 
       if (res.statusCode !== 200) {
@@ -159,9 +159,9 @@ function deletePackage (opts, callback) {
     debug(res.statusCode, body)
 
     if (res.statusCode === 401) {
-      if (isCallback) return callback(new Error('authentication error, please run `npm login` or set a correct token'))
+      if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
 
-      log.panic('authentication error, please run `npm login` or set a correct token')
+      log.panic('authentication error, please run `nscm signin` or set a correct token')
       return
     }
 
@@ -213,9 +213,9 @@ function getWhitelist (opts, callback) {
     debug(res.statusCode, body)
 
     if (res.statusCode === 401) {
-      if (isCallback) return callback(new Error('authentication error, please run `npm login` or set a correct token'))
+      if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
 
-      log.panic('authentication error, please run `npm login` or set a correct token')
+      log.panic('authentication error, please run `nscm signin` or set a correct token')
       return
     }
 

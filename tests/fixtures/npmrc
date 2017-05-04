@@ -1,0 +1,8 @@
+init.author.name=Max Harris
+init.author.email=harris.max@gmail.com
+init.author.url=http://maxharris.org/
+email=npm@nodesource.com
+registry.npmjs.org/:_authToken=ab01234c-5678-901d-2345-e67f8g901hij
+progress=false
+#commentedkey=value
+//notacommentjustaprotocolfreeurl.com=chompinonkalelikeagiraffe
