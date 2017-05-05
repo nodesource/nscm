@@ -1,0 +1,16 @@
+# must be mode 0600; eg `chmod 0600 .npmrc`
+
+cache=~/.npm-ncm
+# always-auth=true
+
+# registry=https://registry.npmjs.org/
+# registry=https://foo.registry.nodesource.io
+# registry=http://localhost:3002
+
+# pmuellr@nodesource.com
+# registry=https://xxxxxxxxxxxxxxxxxxxx.registry.nodesource.io/
+
+# pmuellr@apache.org
+# registry=https://yyyyyyyyyyyyyyyyyyyy.registry.nodesource.io/
+
+registry=https://yyyyyyyyyyyyyyyyyyyy.registry.nodesource.io/
