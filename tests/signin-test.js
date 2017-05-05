@@ -30,7 +30,6 @@ const localNpmrc = (registryUrl) => [
 const isNpmrcGlobal = (fd) => fd === path.join(os.homedir(), '.npmrc')
 
 test('signin', t => {
-  const authCode = '12ab34cd56ef'
   const registryUrl = '//ab12cd34ef56gh78ij90.registry.nodesource.io'
 
   t.plan(12)
