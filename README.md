@@ -24,6 +24,8 @@ Usage: nscm [command] [options]
     help          Display help
     report, r     Get a report of your packages
     whitelist, w  Whitelist your packages
+    signin, s     Sign into nscm via email (--github or --google for SSO)
+    signout, o    Sign out of nscm
 
   Options:
 
