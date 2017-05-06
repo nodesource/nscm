@@ -70,9 +70,13 @@ function accessTokenReceived (error, response, info) {
       if (jwt) {
         const globalNpmrc = path.join(os.homedir(), '.npmrc')
         const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
-        const onGlobalConfigParsed = (parsedConfig) => Object.assign(
-          parsedConfig, { [authTokenKey]: { value: jwt, comment: false } }
-        )
+
+        // filter out any lines that might conflict,
+        // then add a new line containing the latest jwt
+        const onGlobalConfigParsed = (parsedConfig) => parsedConfig
+          .filter(line => line.key !== authTokenKey)
+          .concat({ key: authTokenKey, value: jwt, comment: false })
+
         updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
         config.store.set('token', jwt)
       } else {
@@ -81,9 +85,15 @@ function accessTokenReceived (error, response, info) {
 
       if (certifiedModulesUrl) {
         const localNpmrc = path.join(process.cwd(), '.npmrc')
-        const onLocalConfigParsed = (parsedConfig) => Object.assign(
-          parsedConfig, { registry: { value: certifiedModulesUrl, comment: false } }
-        )
+
+        // filter out any lines that might conflict,
+        // comment out any existing lines that point to other registries,
+        // then add a new line pointing to the current registry
+        const onLocalConfigParsed = (parsedConfig) => parsedConfig
+          .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
+          .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
+          .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
+
         updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
         config.store.set('registry', certifiedModulesUrl)
       } else {

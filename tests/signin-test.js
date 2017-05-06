@@ -81,7 +81,7 @@ test('signin', t => {
     '../lib/rc': {
       updateConfig: (configPath, commentChar, onConfigParsed) => {
         t.equals(commentChar, '#', 'comment char')
-        onConfigParsed({})
+        onConfigParsed([])
 
         const globalNpmrc = path.join(os.homedir(), '.npmrc')
         const localNpmrc = path.join(process.cwd(), '.npmrc')
