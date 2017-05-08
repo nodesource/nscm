@@ -58,7 +58,10 @@ function stripProtocol (certifiedModulesUrl) {
 }
 
 function accessTokenReceived (error, response, info) {
-  if (error) { console.error(error) }
+  if (error) {
+    return console.error(`signin failed: unexpected error receiving access token: ${error}`)
+  }
+
   if (response.statusCode !== 200) {
     console.error(info)
   } else {
