@@ -41,11 +41,11 @@ function exchangeAuthCodeForAccessToken (authorizationCode) {
     url: exchangeUri,
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({
-      'grant_type': 'authorization_code',
-      'client_id': clientId,
-      'code_verifier': verifier,
-      'code': authorizationCode,
-      'redirect_uri': redirectUri
+      grant_type: 'authorization_code',
+      client_id: clientId,
+      code_verifier: verifier,
+      code: authorizationCode,
+      redirect_uri: redirectUri
     })
   }
 
