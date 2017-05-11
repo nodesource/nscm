@@ -1,6 +1,7 @@
 'use strict'
 
 const config = require('../lib/config')
+const tools = require('../lib/tools')
 const logger = require('../lib/logger')
 
 function set (name, sub, opts) {
@@ -20,6 +21,10 @@ function set (name, sub, opts) {
   if (config.valid.indexOf(key) === -1) {
     logger.panic(`${key} isn't a valid key`)
     return
+  }
+
+  if (key === 'registry') {
+    value = tools.normalizeRegistry(value)
   }
 
   config.store.set(key, value)
