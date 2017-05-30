@@ -63,49 +63,49 @@ function accessTokenReceived (error, response, info) {
   }
 
   if (response.statusCode !== 200) {
-    console.error(info)
-  } else {
-    const parsedInfo = json(info)
-    if (parsedInfo) {
-      const commentChar = '#'
-      const { jwt, certifiedModulesUrl } = parsedInfo
-
-      if (jwt) {
-        const globalNpmrc = path.join(os.homedir(), '.npmrc')
-        const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
-
-        // filter out any lines that might conflict,
-        // then add a new line containing the latest jwt
-        const onGlobalConfigParsed = (parsedConfig) => parsedConfig
-          .filter(line => line.key !== authTokenKey)
-          .concat({ key: authTokenKey, value: jwt, comment: false })
-
-        updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
-        config.store.set('token', jwt)
-      } else {
-        console.error('signin failed: did not receive JWT')
-      }
-
-      if (certifiedModulesUrl) {
-        const localNpmrc = path.join(process.cwd(), '.npmrc')
-
-        // filter out any lines that might conflict,
-        // comment out any existing lines that point to other registries,
-        // then add a new line pointing to the current registry
-        const onLocalConfigParsed = (parsedConfig) => parsedConfig
-          .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
-          .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
-          .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
-
-        updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
-        config.store.set('registry', certifiedModulesUrl)
-      } else {
-        console.error('signin failed: did not receive certifiedModulesUrl')
-      }
-    } else {
-      console.error(`signin failed: error parsing response from ${authProxy}, info: ${info}`)
-    }
+    return console.error(info)
   }
+
+  const parsedInfo = json(info)
+  if (!parsedInfo) {
+    return console.error(`signin failed: error parsing response from ${authProxy}, info: ${info}`)
+  }
+
+  const commentChar = '#'
+  const { jwt, certifiedModulesUrl } = parsedInfo
+
+  if (!jwt) {
+    return console.error('signin failed: did not receive JWT')
+  }
+
+  const globalNpmrc = path.join(os.homedir(), '.npmrc')
+  const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
+
+  // filter out any lines that might conflict,
+  // then add a new line containing the latest jwt
+  const onGlobalConfigParsed = (parsedConfig) => parsedConfig
+    .filter(line => line.key !== authTokenKey)
+    .concat({ key: authTokenKey, value: jwt, comment: false })
+
+  updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
+  config.store.set('token', jwt)
+
+  if (!certifiedModulesUrl) {
+    return console.error('signin failed: did not receive certifiedModulesUrl')
+  }
+
+  const localNpmrc = path.join(process.cwd(), '.npmrc')
+
+  // filter out any lines that might conflict,
+  // comment out any existing lines that point to other registries,
+  // then add a new line pointing to the current registry
+  const onLocalConfigParsed = (parsedConfig) => parsedConfig
+    .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
+    .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
+    .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
+
+  updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
+  config.store.set('registry', certifiedModulesUrl)
 }
 
 function ssoAuth (connection) {
