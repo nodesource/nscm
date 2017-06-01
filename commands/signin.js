@@ -2,10 +2,6 @@ const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
 const readline = require('readline')
-let rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
 const path = require('path')
 const os = require('os')
 const url = require('url')
@@ -27,6 +23,7 @@ const scope = 'email offline_access openid'
 const device = 'nscm'
 const responseType = 'code'
 const codeChallengeMethod = 'S256'
+let rl
 
 function base64URLEncode (str) {
   return str.toString('base64')
@@ -209,6 +206,11 @@ function hidden(query, cb) {
 }
 
 function signin (name, sub, options) {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+
   if (options.github) {
     ssoAuth('github')
   } else if (options.google) {
