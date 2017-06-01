@@ -45,9 +45,16 @@ test('signin', t => {
       t.equals(parsedUrl.redirect_uri, 'https://platform.nodesource.io/pkce', 'initial url: redirect uri')
       callback()
     },
-    'readline-sync': {
-      question: (query, options) => {
-        t.pass('readline question')
+    readline: {
+      createInterface: function () {
+        return {
+          on: () => {},
+          close: () => {},
+          question: (query, cb) => {
+            t.pass('readline question')
+            cb('somevalue')
+          }
+        }
       }
     },
     fs: {

@@ -1,7 +1,11 @@
 const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
-const rls = require('readline-sync')
+const readline = require('readline')
+let rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
 const path = require('path')
 const os = require('os')
 const url = require('url')
@@ -58,6 +62,7 @@ function stripProtocol (certifiedModulesUrl) {
 }
 
 function accessTokenReceived (error, response, info) {
+  rl.close()
   if (error) {
     return console.error(`signin failed: unexpected error receiving access token: ${error}`)
   }
@@ -82,43 +87,47 @@ function accessTokenReceived (error, response, info) {
     return console.error('signin failed: did not receive teams')
   }
 
-  const team = teams.length === 1 ? teams[0] : getUserTeam(teams)
+  if (teams.length === 1) return onTeam(teams[0])
 
-  if (!team || !team.id) {
-    return console.error('post-signin config failed: invalid team.')
+  getUserTeam(teams, onTeam)
+
+  function onTeam (team) {
+    if (!team || !team.id) {
+      return console.error('post-signin config failed: invalid team.')
+    }
+
+    const registry = authProxy.replace('nodesource', team.id)
+    const certifiedModulesUrl = `https://${registry}`
+
+    const globalNpmrc = path.join(os.homedir(), '.npmrc')
+    const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
+
+    // filter out any lines that might conflict,
+    // then add a new line containing the latest jwt
+    const onGlobalConfigParsed = (parsedConfig) => parsedConfig
+      .filter(line => line.key !== authTokenKey)
+      .concat({ key: authTokenKey, value: jwt, comment: false })
+
+    updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
+    config.store.set('token', jwt)
+
+    if (!certifiedModulesUrl) {
+      return console.error('signin failed: could not construct certifiedModulesUrl')
+    }
+
+    const localNpmrc = path.join(process.cwd(), '.npmrc')
+
+    // filter out any lines that might conflict,
+    // comment out any existing lines that point to other registries,
+    // then add a new line pointing to the current registry
+    const onLocalConfigParsed = (parsedConfig) => parsedConfig
+      .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
+      .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
+      .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
+
+    updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
+    config.store.set('registry', certifiedModulesUrl)
   }
-
-  const registry = authProxy.replace('nodesource', team.id)
-  const certifiedModulesUrl = `https://${registry}`
-
-  const globalNpmrc = path.join(os.homedir(), '.npmrc')
-  const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
-
-  // filter out any lines that might conflict,
-  // then add a new line containing the latest jwt
-  const onGlobalConfigParsed = (parsedConfig) => parsedConfig
-    .filter(line => line.key !== authTokenKey)
-    .concat({ key: authTokenKey, value: jwt, comment: false })
-
-  updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
-  config.store.set('token', jwt)
-
-  if (!certifiedModulesUrl) {
-    return console.error('signin failed: could not construct certifiedModulesUrl')
-  }
-
-  const localNpmrc = path.join(process.cwd(), '.npmrc')
-
-  // filter out any lines that might conflict,
-  // comment out any existing lines that point to other registries,
-  // then add a new line pointing to the current registry
-  const onLocalConfigParsed = (parsedConfig) => parsedConfig
-    .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
-    .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
-    .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
-
-  updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
-  config.store.set('registry', certifiedModulesUrl)
 }
 
 function ssoAuth (connection) {
@@ -132,37 +141,71 @@ function ssoAuth (connection) {
 
   open(initialUrl, error => {
     if (error) {
-      console.log(`open a browswer and navigate to: ${encodeURI(initialUrl)}`)
+      console.log(`open a browser and navigate to: ${encodeURI(initialUrl)}`)
     } else {
-      exchangeAuthCodeForAccessToken(rls.question(prompt))
+      rl.question(prompt, answer => exchangeAuthCodeForAccessToken(answer))
     }
   })
 }
 
-function getUserTeam (teams) {
-  const prompt = [
-    'Enter the number of the NodeSource Team would you like to use for this session. '
-  ]
-  teams.forEach((team, index) => {
-    prompt.push(`${index+1}: ${team.name} (${team.role})`)
+function getUserTeam (teams, cb) {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
   })
-  prompt.push('\n')
-  const index = rls.question(prompt.join('\n'))
-  return teams[parseInt(index) - 1]
+  const prompt = teams.map((team, index) => {
+    return `${index + 1}: ${team.name} (${team.role})`
+  })
+  prompt.push('Enter the number of the NodeSource Team would you like to use for this session. ')
+  rl.question(prompt.join('\n'), index => {
+    rl.close()
+    cb(teams[parseInt(index) - 1])
+  })
 }
 
 function emailAuth () {
-  const email = rls.question('email: ')
-  const password = rls.question('password: ', { hideEchoBack: true, mask: '' })
+  rl.question('email: ', email => {
+    rl.close()
+    hidden('password: ', password => {
+      const options = {
+        method: 'POST',
+        url: `https://${authProxy}/-/signin`,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+      }
 
-  const options = {
-    method: 'POST',
-    url: `https://${authProxy}/-/signin`,
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
+      request(options, accessTokenReceived)
+    })
+  })
+}
+
+function hidden(query, cb) {
+  const stdin = process.openStdin();
+  const hidden = readline.createInterface({
+    input: stdin,
+    output: process.stdout
+  })
+  function onData (char) {
+    char = char + "";
+    switch (char) {
+      case "\n":
+      case "\r":
+      case "\u0004":
+        stdin.removeListener('data', onData);
+        break;
+      default:
+        process.stdout.write("\033[2K\033[200D" + query + Array(hidden.line.length+1).join("*"));
+        break;
+    }
   }
 
-  request(options, accessTokenReceived)
+  stdin.on('data', onData)
+
+  hidden.question(query, function(value) {
+     hidden.history = hidden.history.slice(1);
+     hidden.close()
+     cb(value);
+  });
 }
 
 function signin (name, sub, options) {
