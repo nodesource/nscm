@@ -78,6 +78,10 @@ function accessTokenReceived (error, response, info) {
     return console.error('signin failed: did not receive JWT')
   }
 
+  if (!teams) {
+    return console.error('signin failed: did not receive teams')
+  }
+
   const team = teams.length === 1 ? teams[0] : getUserTeam(teams)
 
   if (!team || !team.id) {
