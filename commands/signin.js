@@ -72,11 +72,20 @@ function accessTokenReceived (error, response, info) {
   }
 
   const commentChar = '#'
-  const { jwt, certifiedModulesUrl } = parsedInfo
+  const { jwt, teams } = parsedInfo
 
   if (!jwt) {
     return console.error('signin failed: did not receive JWT')
   }
+
+  const team = teams.length === 1 ? teams[0] : getUserTeam(teams)
+
+  if (!team || !team.id) {
+    return console.error('post-signin config failed: invalid team.')
+  }
+
+  const registry = authProxy.replace('nodesource', team.id)
+  const certifiedModulesUrl = `https://${registry}`
 
   const globalNpmrc = path.join(os.homedir(), '.npmrc')
   const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
@@ -91,7 +100,7 @@ function accessTokenReceived (error, response, info) {
   config.store.set('token', jwt)
 
   if (!certifiedModulesUrl) {
-    return console.error('signin failed: did not receive certifiedModulesUrl')
+    return console.error('signin failed: could not construct certifiedModulesUrl')
   }
 
   const localNpmrc = path.join(process.cwd(), '.npmrc')
@@ -124,6 +133,18 @@ function ssoAuth (connection) {
       exchangeAuthCodeForAccessToken(rls.question(prompt))
     }
   })
+}
+
+function getUserTeam (teams) {
+  const prompt = [
+    'Enter the number of the NodeSource Team would you like to use for this session. '
+  ]
+  teams.forEach((team, index) => {
+    prompt.push(`${index+1}: ${team.name} (${team.role})`)
+  })
+  prompt.push('\n')
+  const index = rls.question(prompt.join('\n'))
+  return teams[parseInt(index) - 1]
 }
 
 function emailAuth () {

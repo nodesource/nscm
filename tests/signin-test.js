@@ -75,7 +75,12 @@ test('signin', t => {
     },
     request: (options, accessTokenReceived) => {
       accessTokenReceived(null, { statusCode: 200 }, JSON.stringify({
-        jwt, certifiedModulesUrl: `https:${registryUrl}`
+        jwt,
+        teams: [{
+          id: '35dbd13d-81a2-4b1b-94df-7c06151ec21f',
+          name: 'test',
+          role: 'member'
+        }]
       }))
     },
     '../lib/rc': {
