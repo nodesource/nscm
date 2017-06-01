@@ -45,10 +45,9 @@ test('signin', t => {
       t.equals(parsedUrl.redirect_uri, 'https://platform.nodesource.io/pkce', 'initial url: redirect uri')
       callback()
     },
-    'readline-sync': {
-      question: (query, options) => {
-        t.pass('readline question')
-      }
+    'prompt-sync': (config) => {
+      t.pass('readline question')
+      return (prompt, options) => {}
     },
     fs: {
       openSync: (path, mode, callback) => {

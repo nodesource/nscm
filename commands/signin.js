@@ -1,13 +1,15 @@
 const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
-const rls = require('readline-sync')
+const ps = require('prompt-sync')
 const path = require('path')
 const os = require('os')
 const url = require('url')
 const { updateConfig } = require('../lib/rc')
 const json = require('../lib/json')
 const config = require('../lib/config')
+
+const question = ps({ sigint: true })
 
 const verifier = base64URLEncode(crypto.randomBytes(32))
 const challenge = base64URLEncode(sha256(verifier))
@@ -121,14 +123,14 @@ function ssoAuth (connection) {
     if (error) {
       console.log(`open a browswer and navigate to: ${encodeURI(initialUrl)}`)
     } else {
-      exchangeAuthCodeForAccessToken(rls.question(prompt))
+      exchangeAuthCodeForAccessToken(question(prompt))
     }
   })
 }
 
 function emailAuth () {
-  const email = rls.question('email: ')
-  const password = rls.question('password: ', { hideEchoBack: true, mask: '' })
+  const email = question('email: ')
+  const password = question('password: ', { echo: '*' })
 
   const options = {
     method: 'POST',
