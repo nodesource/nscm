@@ -176,33 +176,34 @@ function emailAuth () {
   })
 }
 
-function hidden(query, cb) {
-  const stdin = process.openStdin();
+function hidden (query, cb) {
+  const stdin = process.openStdin()
   const hidden = readline.createInterface({
     input: stdin,
     output: process.stdout
   })
   function onData (char) {
-    char = char + "";
+    char = char.toString()
     switch (char) {
-      case "\n":
-      case "\r":
-      case "\u0004":
-        stdin.removeListener('data', onData);
-        break;
+      case '\n':
+      case '\r':
+      case '\u0004':
+        stdin.removeListener('data', onData)
+        break
       default:
-        process.stdout.write("\033[2K\033[200D" + query + Array(hidden.line.length+1).join("*"));
-        break;
+        process.stdout.write('\033[2K\033[200D' + query +
+          Array(hidden.line.length + 1).join('*'))
+        break
     }
   }
 
   stdin.on('data', onData)
 
-  hidden.question(query, function(value) {
-     hidden.history = hidden.history.slice(1);
-     hidden.close()
-     cb(value);
-  });
+  hidden.question(query, function (value) {
+    hidden.history = hidden.history.slice(1)
+    hidden.close()
+    cb(value)
+  })
 }
 
 function signin (name, sub, options) {
