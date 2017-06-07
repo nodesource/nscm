@@ -1,6 +1,6 @@
 const os = require('os')
 const path = require('path')
-const { updateConfig } = require('../lib/rc')
+const updateConfig = require('../lib/rc').updateConfig
 const config = require('../lib/config')
 
 function signout () {

@@ -1,5 +1,6 @@
 const test = require('tape')
-const { parse, stringify } = require('../lib/rc')
+const parse = require('../lib/rc').parse
+const stringify = require('../lib/rc').stringify
 const fs = require('fs')
 const path = require('path')
 

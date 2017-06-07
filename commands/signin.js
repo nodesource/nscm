@@ -1,3 +1,5 @@
+'use strict'
+
 const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
@@ -5,7 +7,7 @@ const readline = require('readline')
 const path = require('path')
 const os = require('os')
 const url = require('url')
-const { updateConfig } = require('../lib/rc')
+const updateConfig = require('../lib/rc').updateConfig
 const json = require('../lib/json')
 const config = require('../lib/config')
 
@@ -54,8 +56,8 @@ function exchangeAuthCodeForAccessToken (authorizationCode) {
 }
 
 function stripProtocol (certifiedModulesUrl) {
-  const { hostname } = url.parse(certifiedModulesUrl)
-  return `//${hostname}/`
+  const parsed = url.parse(certifiedModulesUrl)
+  return `//${parsed.hostname}/`
 }
 
 function accessTokenReceived (error, response, info) {
@@ -74,7 +76,8 @@ function accessTokenReceived (error, response, info) {
   }
 
   const commentChar = '#'
-  const { jwt, teams } = parsedInfo
+  const jwt = parsedInfo.jwt
+  const teams = parsedInfo.teams
 
   if (!jwt) {
     return console.error('signin failed: did not receive JWT')
@@ -191,7 +194,7 @@ function hidden (query, cb) {
         stdin.removeListener('data', onData)
         break
       default:
-        process.stdout.write('\033[2K\033[200D' + query +
+        process.stdout.write('\u001b[2K\u001b[200D' + query +
           Array(hidden.line.length + 1).join('*'))
         break
     }
