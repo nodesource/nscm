@@ -225,6 +225,8 @@ registry = https://{registryId}.registry.nodesource.io
 <tr><th align="left">Adrián Estrada</th><td><a href="https://github.com/edsadr">GitHub/edsadr</a></td><td><a href="http://twitter.com/edsadr">Twitter/@edsadr</a></td></tr>
 <tr><th align="left">Max Harris</th><td><a href="https://github.com/maxharris9">GitHub/maxharris9</a></td><td><a href="http://twitter.com/maxharris9">Twitter/@maxharris9</a></td></tr>
 </tbody></table>
+<tr><th align="left">Tierney Cyren</th><td><a href="https://github.com/bnb">GitHub/bnb</a></td><td><a href="http://twitter.com/bitandbang">Twitter/@bitandbang</a></td></tr>
+</tbody></table>
 
 Contributions are welcomed from anyone wanting to improve this project!
 
