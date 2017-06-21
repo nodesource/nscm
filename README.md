@@ -1,7 +1,6 @@
+# nscm - the CLI Utility for [NodeSource Certified Modules](https://nodesource.com/products/certified-modules)
 
-# NodeSource Certified Modules
-
-`nscm` is a simple utility to whitelist non-certified packages and can be used to generate a report of matching certified packages in a specified private registry.
+`nscm` is a simple utility for [NodeSource Certified Modules](https://nodesource.com/products/certified-modules) that can be used to easily authenticate with your Certified Modules registry, to whitelist pacakges that fail certification, and to generate a detailed report about current project and the modules it depends on.
 
 ## Installation
 
@@ -234,6 +233,7 @@ $ nscm config reset
 <tr><th align="left">Julián Duque</th><td><a href="https://github.com/julianduque">GitHub/julianduque</a></td><td><a href="http://twitter.com/julian_duque">Twitter/@julian_duque</a></td></tr>
 <tr><th align="left">Adrián Estrada</th><td><a href="https://github.com/edsadr">GitHub/edsadr</a></td><td><a href="http://twitter.com/edsadr">Twitter/@edsadr</a></td></tr>
 <tr><th align="left">Max Harris</th><td><a href="https://github.com/maxharris9">GitHub/maxharris9</a></td><td><a href="http://twitter.com/maxharris9">Twitter/@maxharris9</a></td></tr>
+</tbody><tr><th align="left">Tierney Cyren</th><td><a href="https://github.com/bnb">GitHub/bnb</a></td><td><a href="http://twitter.com/bitandbang">Twitter/@bitandbang</a></td></tr>
 </tbody></table>
 
 Contributions are welcomed from anyone wanting to improve this project!
