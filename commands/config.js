@@ -3,6 +3,8 @@
 const config = require('../lib/config')
 const tools = require('../lib/tools')
 const logger = require('../lib/logger')
+const inquirer = require('inquirer')
+const chalk = require('chalk')
 
 function set (name, sub, opts) {
   let key = sub[0]
@@ -62,9 +64,31 @@ function list (name, sub, opts) {
   })
 }
 
+function reset (name, sub, opts) {
+  inquirer.prompt(
+    {
+      type: 'confirm',
+      name: 'reset',
+      message: 'This will reset your configuration options, Are you sure?'
+    }).then(confirm => {
+      if (!confirm.reset) {
+        return
+      }
+
+      const all = config.store.all
+      const keys = Object.keys(all)
+      keys.forEach(key => {
+        config.store.delete(key)
+      })
+
+      console.log(`${chalk.green.bold('All configuration options were set to default values')}\n`)
+    })
+}
+
 module.exports = {
   set: set,
   get: get,
   del: del,
-  list: list
+  list: list,
+  reset: reset
 }
