@@ -217,6 +217,15 @@ $ nscm config list
 concurrency = 15
 registry = https://{registryId}.registry.nodesource.io
 ```
+
+### `nscm config reset`
+
+Reset all configuration options to default values.
+
+```
+$ nscm config reset
+```
+
 ## Authors and Contributors
 
 <table><tbody>

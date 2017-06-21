@@ -47,7 +47,7 @@ function exchangeAuthCodeForAccessToken (authorizationCode) {
       grant_type: 'authorization_code',
       client_id: clientId,
       code_verifier: verifier,
-      code: authorizationCode,
+      code: authorizationCode.trim(),
       redirect_uri: redirectUri
     })
   }
