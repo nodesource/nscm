@@ -142,9 +142,9 @@ function ssoAuth (connection) {
   open(initialUrl, error => {
     if (error) {
       console.log(`open a browser and navigate to: ${encodeURI(initialUrl)}`)
-    } else {
-      rl.question(prompt, answer => exchangeAuthCodeForAccessToken(answer))
     }
+
+    rl.question(prompt, answer => exchangeAuthCodeForAccessToken(answer))
   })
 }
 
