@@ -32,7 +32,6 @@
     "cli-table": "~0.3.1",
     "configstore": "^3.0.0",
     "debug": "~2.6.1",
-    "inquirer": "^3.0.1",
     "mkpath": "~1.0.0",
     "open": "0.0.5",
     "request": "2.2.5",

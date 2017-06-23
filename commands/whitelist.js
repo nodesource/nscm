@@ -2,10 +2,10 @@
 
 const debug = require('debug')('nscm:whitelist')
 const Table = require('cli-table')
-const inquirer = require('inquirer')
 const eachLimit = require('async.eachlimit')
 const request = require('request')
 const encodeQuery = require('querystring').encode
+const readline = require('readline')
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
@@ -248,46 +248,36 @@ function getWhitelist (opts, callback) {
 function reset (name, sub, opts, callback) {
   const isCallback = typeof callback === 'function'
 
-  inquirer.prompt({ type: 'confirm', name: 'reset', message: 'Are you sure?' }).then(confirm => {
-    if (!confirm.reset) {
-      return
-    }
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
 
-    tools.getOptions(opts, function (err, opts) {
-      if (err) {
-        if (isCallback) return callback(err)
+  const handleError = (err) => {
+    if (isCallback) return callback(err)
+    log.panic(err.message)
+  }
 
-        log.panic(err.message)
-        return
-      }
+  rl.question(`${chalk.yellow('?')} ${chalk.red.bold('Are you sure?')} `, (answer) => {
+    rl.close()
+    if (answer.match(/^y(es)?$/i)) {
+      tools.getOptions(opts, function (err, opts) {
+        if (err) return handleError(err)
 
-      getWhitelist(opts, (err, whitelist) => {
-        if (err) {
-          if (isCallback) return callback(err)
+        getWhitelist(opts, (err, whitelist) => {
+          if (err) return handleError(err)
 
-          log.panic(err.message)
-          return
-        }
+          eachLimit(whitelist, opts.concurrency, (pkg, next) => {
+            deletePackage(Object.assign(opts, { package: `${pkg.name}@${pkg.version}` }), next)
+          }, err => {
+            if (err) return handleError(err)
 
-        eachLimit(whitelist, opts.concurrency, (pkg, next) => {
-          deletePackage(Object.assign(opts, { package: `${pkg.name}@${pkg.version}` }), next)
-        }, err => {
-          if (err) {
-            if (isCallback) return callback(err)
-
-            log.panic(err.message)
-            return
-          }
-
-          if (isCallback) return callback(null, whitelist)
-          console.error(`${chalk.green.bold(whitelist.length)} packages removed from whitelist\n`)
+            if (isCallback) return callback(null, whitelist)
+            console.error(`${chalk.green.bold(whitelist.length)} packages removed from whitelist\n`)
+          })
         })
       })
-    })
-  }).catch(err => {
-    if (isCallback) return callback(err)
-
-    log.panic(err.message)
+    }
   })
 }
 
@@ -310,8 +300,9 @@ function generateReport (opts, callback) {
   const isCallback = typeof callback === 'function'
 
   let uncertified = []
-  let exclude = false
+  let selected = []
   let all = opts.all
+  let k = 0
 
   tools.getPackages(opts, (err, packages) => {
     if (err) {
@@ -333,80 +324,59 @@ function generateReport (opts, callback) {
 
       uncertified = filterUncertified(results)
 
-      const questions = []
-      console.error(`\n${chalk.red.bold(uncertified.length)} packages aren't certified, do you want to add them to the whitelist?`)
+      if (!all) {
+        console.error(`\n${chalk.red.bold(uncertified.length)} packages aren't certified, do you want to add them to the whitelist?`)
+      }
 
-      for (let i = 0, length1 = uncertified.length; i < length1; i++) {
-        let pkgName = `${uncertified[i].name}@${uncertified[i].version.replace(/\./g, '-')}`
-        questions.push({
-          type: 'expand',
-          name: pkgName,
-          message: `add ${chalk.green.bold(formatPackageName(pkgName))}`,
-          default: 'y',
-          pageSize: 3,
-          choices: [
-            {
-              key: 'Y',
-              name: 'Yes',
-              value: 'y'
-            },
-            {
-              key: 'N',
-              name: 'No',
-              value: 'n'
-            },
-            {
-              key: 'A',
-              name: 'All',
-              value: 'a'
-            }
-          ],
-          filter: function (data) {
-            if (data === 'a') all = true
-            if (data === 'n') exclude = true
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      })
 
-            return data
-          },
-          when: function (answers) {
-            return !all
+      const askQuestion = (pkg) => {
+        let valid = true
+        let text = `${chalk.yellow('?')} add ${chalk.green.bold(pkg.name + '@' + pkg.version)} ` +
+                   `${chalk.white.dim('[y(es), n(o), a(ll)')} `
+
+        rl.question(text, (answer) => {
+          if (answer.match(/^y(es)?$/i)) {
+            selected.push(uncertified[k])
+          } else if (answer.match(/^a(ll)?$/i)) {
+            all = true
+          } else {
+            valid = answer.match(/^n(o)?$/i)
+          }
+
+          if (valid && !all) k++
+
+          if (!all && k < uncertified.length) {
+            askQuestion(uncertified[k])
+          } else {
+            rl.close()
+
+            if (all) selected = completeSelected(selected, uncertified, k)
+
+            addWhitelist(Object.assign(opts, { packages: selected }), callback)
           }
         })
       }
 
-      inquirer.prompt(questions).then((packages) => {
-        if (all && exclude) {
-          packages = cleanAnswers(packages, 'n')
-          packages = selectToCertify(uncertified, packages, true)
-        } else if (all) {
-          packages = uncertified
-        } else {
-          packages = cleanAnswers(packages, 'y')
-          packages = selectToCertify(uncertified, packages, false)
-        }
-
-        addWhitelist(Object.assign(opts, { packages: packages }), callback)
-      }).catch((err) => {
-        if (isCallback) return callback(err)
-
-        log.panic(err.message)
-      })
+      if (all || uncertified.length < 1) {
+        rl.close()
+        addWhitelist(Object.assign(opts, { packages: uncertified }), callback)
+      } else {
+        askQuestion(uncertified[k])
+      }
     })
   })
 }
 
-function cleanAnswers (data, filter) {
-  for (let propName in data) {
-    let value = data[propName].toString().replace(/,/g, '')
-    if (filter && value === filter) {
-      data[propName] = value
-    } else if (filter) {
-      delete data[propName]
-    } else {
-      data[propName] = value
-    }
+function completeSelected (selected, uncertified, k) {
+  for (let i = k, length1 = uncertified.length; i < length1; i++) {
+    selected.push(uncertified[i])
   }
 
-  return data
+  return selected
 }
 
 function formatOutput (opts) {
@@ -419,37 +389,6 @@ function formatOutput (opts) {
   }
   const output = (opts.json) ? JSON.stringify(opts.packages, null, 2) : table.toString()
   return output
-}
-
-function formatPackageName (packageName) {
-  let parts = packageName.split('@')
-  let version = parts.pop()
-  parts.push(version.replace(/-/g, '.'))
-  return parts.join('@')
-}
-
-function selectToCertify (uncertified, data, remove) {
-  const keys = Object.keys(data)
-  const packages = []
-  const versions = []
-  const selected = []
-
-  for (let i = 0; i < keys.length; i++) {
-    let pkg = keys[i].split('@') // TODO: Potential bug with scoped packages
-    packages.push(pkg[0] || '')
-    versions.push(pkg[1] || '')
-  }
-
-  for (let i = 0; i < uncertified.length; i++) {
-    let index = packages.indexOf(uncertified[i].name)
-    if (index !== -1 && versions[index].replace(/-/g, '.') === uncertified[i].version && !remove) {
-      selected.push(uncertified[i])
-    } else if (index === -1 & remove) {
-      selected.push(uncertified[i])
-    }
-  }
-
-  return selected
 }
 
 function filterUncertified (pkgs) {

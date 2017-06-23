@@ -3,7 +3,7 @@
 const config = require('../lib/config')
 const tools = require('../lib/tools')
 const logger = require('../lib/logger')
-const inquirer = require('inquirer')
+const readline = require('readline')
 const chalk = require('chalk')
 
 function set (name, sub, opts) {
@@ -65,16 +65,15 @@ function list (name, sub, opts) {
 }
 
 function reset (name, sub, opts) {
-  inquirer.prompt(
-    {
-      type: 'confirm',
-      name: 'reset',
-      message: 'This will reset your configuration options, Are you sure?'
-    }).then(confirm => {
-      if (!confirm.reset) {
-        return
-      }
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
 
+  rl.question(`${chalk.yellow('?')} ${chalk.red.bold('Are you sure?')} `, (answer) => {
+    rl.close()
+
+    if (answer.match(/^y(es)?$/i)) {
       const all = config.store.all
       const keys = Object.keys(all)
       keys.forEach(key => {
@@ -82,7 +81,8 @@ function reset (name, sub, opts) {
       })
 
       console.log(`${chalk.green.bold('All configuration options were set to default values')}\n`)
-    })
+    }
+  })
 }
 
 module.exports = {
