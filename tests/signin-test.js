@@ -50,9 +50,9 @@ test('signin', t => {
         return {
           on: () => {},
           close: () => {},
-          question: (query, cb) => {
+          question: (query, done) => {
             t.pass('readline question')
-            cb('somevalue')
+            done('somevalue')
           }
         }
       }

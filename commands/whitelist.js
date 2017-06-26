@@ -82,7 +82,7 @@ function addWhitelist (opts, callback) {
     }, (err, res, body) => {
       if (err) return next(err)
 
-      debug(res.statusCode, body)
+      debug(pkg.name, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
       if (res.statusCode === 401) {
         return next(new Error('authentication error, please run `nscm signin` or set a correct token'))
@@ -155,7 +155,7 @@ function deletePackage (opts, callback) {
       return
     }
 
-    debug(res.statusCode, body)
+    debug(pkg, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
       if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
@@ -209,7 +209,7 @@ function getWhitelist (opts, callback) {
       return
     }
 
-    debug(res.statusCode, body)
+    debug(res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
       if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
