@@ -81,25 +81,25 @@ please wait while we process the information
   {
     "name": "body-parser",
     "version": "1.15.2",
-    "from": "body-parser@>=1.15.2 <1.16.0",
+    "from": "1.15.2 <1.16.0",
     "score": 100
   },
   {
     "name": "debug",
     "version": "2.2.0",
-    "from": "debug@>=2.2.0 <2.3.0",
+    "from": ">=2.2.0 <2.3.0",
     "score": 70
   },
   {
     "name": "ms",
     "version": "0.7.1",
-    "from": "ms@0.7.1",
+    "from": "0.7.1",
     "score": 100
   },
   {
     "name": "bytes",
     "version": "2.4.0",
-    "from": "bytes@2.4.0",
+    "from": "2.4.0",
     "score": 100
   },
 ...

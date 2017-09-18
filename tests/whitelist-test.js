@@ -7,10 +7,11 @@ const proxyquire = require('proxyquire')
 
 const tools = {
   getPackages: function (opts, callback) {
+    if (opts.package) {
+      callback(null, require(path.join(__dirname, 'fixtures', 'npm-gpl-2.0.json')))
+      return
+    }
     callback(null, require(path.join(__dirname, 'fixtures', 'npm.json')))
-  },
-  runNpm: function (opts, callback) {
-    callback(null, require(path.join(__dirname, 'fixtures', 'npm-gpl-2.0.json')))
   }
 }
 
@@ -19,6 +20,7 @@ const whitelist = proxyquire('../commands/whitelist', {
 })
 
 const expected = require('./fixtures/whitelist')
+const expectedList = require('./fixtures/whitelist-list')
 
 const opts = {
   concurrency: 15,
@@ -45,8 +47,7 @@ test('whitelist all packages', t => {
 test('whitelist add', t => {
   const pkg = {
     name: 'gpl-2.0',
-    version: '1.0.0',
-    from: '>=1.0.0 <2.0.0'
+    version: '1.0.0'
   }
 
   nock.load(path.join(__dirname, 'fixtures', 'whitelist-add-nock.json'))
@@ -79,7 +80,7 @@ test('whitelist list', t => {
   whitelist.list(['list', 'r'], [], opts, (err, output) => {
     t.ifErr(err, 'it should not fail')
 
-    t.equal(JSON.stringify(expected), JSON.stringify(output), 'whitelist list should be the same')
+    t.equal(JSON.stringify(expectedList), JSON.stringify(output), 'whitelist list should be the same')
     t.end()
   })
 })

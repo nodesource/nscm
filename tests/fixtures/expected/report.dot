@@ -15,10 +15,10 @@ digraph g {
     "acorn@4.0.11" [
         shape = box,
         style = filled,
-        fillcolor = "#9FFF9F",
+        fillcolor = "#FFFF7F",
         URL = "https://platform.nodesource.io/registry?name=acorn&version=4.0.11",
-        tooltip = "acorn @ 4.0.11 - score: 100%",
-        label = <<font point-size="20">acorn</font><br align='left'/>4.0.11<br align='left'/>score: 100%<br align='left'/>>,
+        tooltip = "acorn @ 4.0.11 - score: 93%",
+        label = <<font point-size="20">acorn</font><br align='left'/>4.0.11<br align='left'/>score: 93%<br align='left'/>>,
     ]
     "gpl-2.0@1.0.0" [
         shape = box,
@@ -31,10 +31,10 @@ digraph g {
     "isarray@2.0.1" [
         shape = box,
         style = filled,
-        fillcolor = "#9FFF9F",
+        fillcolor = "#FF9F9F",
         URL = "https://platform.nodesource.io/registry?name=isarray&version=2.0.1",
-        tooltip = "isarray @ 2.0.1 - score: 100%",
-        label = <<font point-size="20">isarray</font><br align='left'/>2.0.1<br align='left'/>score: 100%<br align='left'/>>,
+        tooltip = "isarray @ 2.0.1 - score: 0%",
+        label = <<font point-size="20">isarray</font><br align='left'/>2.0.1<br align='left'/>score: 0%<br align='left'/>>,
     ]
     "tape@4.6.3" [
         shape = box,
@@ -199,10 +199,10 @@ digraph g {
     "resolve@1.1.7" [
         shape = box,
         style = filled,
-        fillcolor = "#9FFF9F",
+        fillcolor = "#FF9F9F",
         URL = "https://platform.nodesource.io/registry?name=resolve&version=1.1.7",
-        tooltip = "resolve @ 1.1.7 - score: 100%",
-        label = <<font point-size="20">resolve</font><br align='left'/>1.1.7<br align='left'/>score: 100%<br align='left'/>>,
+        tooltip = "resolve @ 1.1.7 - score: 0%",
+        label = <<font point-size="20">resolve</font><br align='left'/>1.1.7<br align='left'/>score: 0%<br align='left'/>>,
     ]
     "resumer@0.0.0" [
         shape = box,

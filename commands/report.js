@@ -11,6 +11,7 @@ const table = new Table({
 })
 
 function report (name, sub, opts, callback) {
+  console.error('please wait while we process the information')
   tools.getOptions(opts, (err, opts) => {
     if (err) {
       log.panic(err.message)
@@ -30,41 +31,43 @@ function generateReport (opts, callback) {
       return
     }
 
-    const packagesTree = packages
+    if (packages && packages.error) {
+      log.panic(`${packages.error} please contact support@nodesource.com`)
+      return
+    }
+
+    const packageTree = packages
     packages = tools.flatten(packages)
 
-    tools.checkPackages(Object.assign(opts, { packages: packages }), (err, results) => {
-      if (err) {
-        if (isCallback) return callback(err)
+    let output
+    if (opts.dot || opts.svg) {
+      output = generateGraphViz(packageTree, packages, opts)
+      formatOutput()
+      return
+    }
 
-        log.panic(err.message)
-        return
+    if (!opts.json) {
+      for (var i = 0; i < packages.length; i++) {
+        table.push([
+          packages[i].name,
+          packages[i].version,
+          packages[i].score || 0
+        ])
       }
+    }
 
-      let output
-      if (opts.dot || opts.svg) {
-        output = generateGraphViz(packagesTree, results, opts)
-      } else {
-        if (!opts.json) {
-          for (var i = 0; i < results.length; i++) {
-            table.push([
-              results[i].name,
-              results[i].version,
-              results[i].score || 0
-            ])
-          }
-        }
-        output = (opts.json) ? JSON.stringify(results, null, 2) : table.toString()
-      }
+    output = (opts.json) ? JSON.stringify(packages, null, 2) : table.toString()
+    formatOutput()
 
+    function formatOutput () {
       if (isCallback) {
-        if (opts.json) return callback(null, results)
+        if (opts.json) return callback(null, packages)
         return callback(null, output)
       }
 
       console.log(output)
-      console.error('Total: ', results.length)
-    })
+      console.error('Total: ', packages.length)
+    }
   })
 }
 

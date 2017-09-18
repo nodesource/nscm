@@ -2,8 +2,7 @@
   "dependencies": {
     "gpl-2.0": {
       "version": "1.0.0",
-      "from": "gpl-2.0@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.nodesource.io/gpl-2.0/-/gpl-2.0-1.0.0.tgz"
+      "score": 0
     }
   }
 }

@@ -173,14 +173,12 @@
     "body": {
       "name": "gpl-2.0",
       "version": "1.0.0",
-      "from": ">=1.0.0 <2.0.0",
       "score": 0
     },
     "status": 200,
     "response": {
       "name": "gpl-2.0",
-      "version": "1.0.0",
-      "from": ">=1.0.0 <2.0.0"
+      "version": "1.0.0"
     },
     "rawHeaders": [
       "Content-Type",

@@ -26,11 +26,11 @@
 <!-- acorn@4.0.11 -->
 <g id="node2" class="node">
 <title>acorn@4.0.11</title>
-<g id="a_node2"><a xlink:href="https://platform.nodesource.io/registry?name=acorn&amp;version=4.0.11" xlink:title="acorn @ 4.0.11 &#45; score: 100%">
-<polygon fill="#9fff9f" stroke="#000000" points="275.369,-814 190.1958,-814 190.1958,-758 275.369,-758 275.369,-814"/>
-<text text-anchor="start" x="197.9896" y="-793" font-family="Times,serif" font-size="20.00" fill="#000000">acorn</text>
-<text text-anchor="start" x="197.9896" y="-778.4" font-family="Times,serif" font-size="14.00" fill="#000000">4.0.11</text>
-<text text-anchor="start" x="197.9896" y="-764.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 100%</text>
+<g id="a_node2"><a xlink:href="https://platform.nodesource.io/registry?name=acorn&amp;version=4.0.11" xlink:title="acorn @ 4.0.11 &#45; score: 93%">
+<polygon fill="#ffff7f" stroke="#000000" points="271.8691,-814 193.6957,-814 193.6957,-758 271.8691,-758 271.8691,-814"/>
+<text text-anchor="start" x="201.4896" y="-793" font-family="Times,serif" font-size="20.00" fill="#000000">acorn</text>
+<text text-anchor="start" x="201.4896" y="-778.4" font-family="Times,serif" font-size="14.00" fill="#000000">4.0.11</text>
+<text text-anchor="start" x="201.4896" y="-764.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 93%</text>
 </a>
 </g>
 </g>
@@ -60,19 +60,19 @@
 <!-- isarray@2.0.1 -->
 <g id="node4" class="node">
 <title>isarray@2.0.1</title>
-<g id="a_node4"><a xlink:href="https://platform.nodesource.io/registry?name=isarray&amp;version=2.0.1" xlink:title="isarray @ 2.0.1 &#45; score: 100%">
-<polygon fill="#9fff9f" stroke="#000000" points="275.369,-666 190.1958,-666 190.1958,-610 275.369,-610 275.369,-666"/>
-<text text-anchor="start" x="197.9896" y="-645" font-family="Times,serif" font-size="20.00" fill="#000000">isarray</text>
-<text text-anchor="start" x="197.9896" y="-630.4" font-family="Times,serif" font-size="14.00" fill="#000000">2.0.1</text>
-<text text-anchor="start" x="197.9896" y="-616.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 100%</text>
+<g id="a_node4"><a xlink:href="https://platform.nodesource.io/registry?name=isarray&amp;version=2.0.1" xlink:title="isarray @ 2.0.1 &#45; score: 0%">
+<polygon fill="#ff9f9f" stroke="#000000" points="268.3692,-666 197.1956,-666 197.1956,-610 268.3692,-610 268.3692,-666"/>
+<text text-anchor="start" x="204.9896" y="-645" font-family="Times,serif" font-size="20.00" fill="#000000">isarray</text>
+<text text-anchor="start" x="204.9896" y="-630.4" font-family="Times,serif" font-size="14.00" fill="#000000">2.0.1</text>
+<text text-anchor="start" x="204.9896" y="-616.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 0%</text>
 </a>
 </g>
 </g>
 <!-- fixture@1.0.0&#45;&gt;isarray@2.0.1 -->
 <g id="edge3" class="edge">
 <title>fixture@1.0.0&#45;&gt;isarray@2.0.1</title>
-<path fill="none" stroke="#000000" d="M154.4322,-656.6084C163.1186,-654.5453 171.8126,-652.4805 180.082,-650.5165"/>
-<polygon fill="#000000" stroke="#000000" points="181.0088,-653.8938 189.9294,-648.1777 179.3912,-647.0833 181.0088,-653.8938"/>
+<path fill="none" stroke="#000000" d="M154.4322,-656.6084C165.6577,-653.9423 176.8959,-651.2732 187.2141,-648.8226"/>
+<polygon fill="#000000" stroke="#000000" points="188.2705,-652.1691 197.1911,-646.453 186.653,-645.3586 188.2705,-652.1691"/>
 </g>
 <!-- tape@4.6.3 -->
 <g id="node5" class="node">
@@ -247,19 +247,19 @@
 <!-- resolve@1.1.7 -->
 <g id="node25" class="node">
 <title>resolve@1.1.7</title>
-<g id="a_node25"><a xlink:href="https://platform.nodesource.io/registry?name=resolve&amp;version=1.1.7" xlink:title="resolve @ 1.1.7 &#45; score: 100%">
-<polygon fill="#9fff9f" stroke="#000000" points="444.9298,-370 359.7566,-370 359.7566,-314 444.9298,-314 444.9298,-370"/>
-<text text-anchor="start" x="367.5504" y="-349" font-family="Times,serif" font-size="20.00" fill="#000000">resolve</text>
-<text text-anchor="start" x="367.5504" y="-334.4" font-family="Times,serif" font-size="14.00" fill="#000000">1.1.7</text>
-<text text-anchor="start" x="367.5504" y="-320.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 100%</text>
+<g id="a_node25"><a xlink:href="https://platform.nodesource.io/registry?name=resolve&amp;version=1.1.7" xlink:title="resolve @ 1.1.7 &#45; score: 0%">
+<polygon fill="#ff9f9f" stroke="#000000" points="439.0936,-370 365.5928,-370 365.5928,-314 439.0936,-314 439.0936,-370"/>
+<text text-anchor="start" x="373.4682" y="-349" font-family="Times,serif" font-size="20.00" fill="#000000">resolve</text>
+<text text-anchor="start" x="373.4682" y="-334.4" font-family="Times,serif" font-size="14.00" fill="#000000">1.1.7</text>
+<text text-anchor="start" x="373.4682" y="-320.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 0%</text>
 </a>
 </g>
 </g>
 <!-- tape@4.6.3&#45;&gt;resolve@1.1.7 -->
 <g id="edge14" class="edge">
 <title>tape@4.6.3&#45;&gt;resolve@1.1.7</title>
-<path fill="none" stroke="#000000" d="M237.7938,-535.7565C246.2661,-495.8207 267.0465,-422.8407 311.5752,-379 322.2161,-368.5235 336.2268,-360.8819 350.0469,-355.3626"/>
-<polygon fill="#000000" stroke="#000000" points="351.3627,-358.608 359.5405,-351.8719 348.947,-352.038 351.3627,-358.608"/>
+<path fill="none" stroke="#000000" d="M237.7938,-535.7565C246.2661,-495.8207 267.0465,-422.8407 311.5752,-379 323.7262,-367.0368 340.2713,-358.7701 355.9091,-353.139"/>
+<polygon fill="#000000" stroke="#000000" points="357.0916,-356.4344 365.4812,-349.964 354.8878,-349.7903 357.0916,-356.4344"/>
 </g>
 <!-- resumer@0.0.0 -->
 <g id="node26" class="node">

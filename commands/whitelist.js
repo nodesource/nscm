@@ -6,6 +6,7 @@ const eachLimit = require('async.eachlimit')
 const request = require('request')
 const encodeQuery = require('querystring').encode
 const readline = require('readline')
+const npa = require('npm-package-arg')
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
@@ -33,14 +34,27 @@ function add (name, sub, opts, callback) {
       return
     }
 
-    addPackage(Object.assign(opts, { package: sub[0] }), callback)
+    const pkg = {
+      dependencies: {}
+    }
+
+    const resolved = npa(sub[0])
+    pkg.dependencies[resolved.name] = resolved.rawSpec || sub[1] || '*'
+
+    debug('add', pkg)
+
+    addPackage(Object.assign(opts, {
+      package: pkg
+    }), callback)
   })
 }
 
 function addPackage (opts, callback) {
   const isCallback = typeof callback === 'function'
 
-  tools.runNpm(opts, (err, output) => {
+  tools.getPackages(opts, onGetPackages)
+
+  function onGetPackages (err, results) {
     if (err) {
       if (isCallback) return callback(err)
 
@@ -48,25 +62,21 @@ function addPackage (opts, callback) {
       return
     }
 
-    const packages = tools.flatten(output)
-
-    tools.checkPackages(Object.assign(opts, { packages: packages }), (err, results) => {
-      if (err) {
-        if (isCallback) return callback(err)
-
-        log.panic(err.message)
-        return
-      }
-
-      opts.packages = filterUncertified(results)
-
-      addWhitelist(opts, callback)
-    })
-  })
+    opts.packages = tools.flatten(results)
+    addWhitelist(opts, callback)
+  }
 }
 
 function addWhitelist (opts, callback) {
   const isCallback = typeof callback === 'function'
+
+  if (opts.packages.length === 0) {
+    const msg = 'package can\'t be resolved, please specify a valid name and version'
+    if (isCallback) return callback(new Error(msg))
+
+    console.log(msg)
+    return
+  }
 
   let success = []
   eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
@@ -82,7 +92,7 @@ function addWhitelist (opts, callback) {
     }, (err, res, body) => {
       if (err) return next(err)
 
-      debug(pkg.name, res.statusCode, JSON.stringify(res.headers, null, 2), body)
+      debug('addWhitelist', pkg.name, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
       if (res.statusCode === 401) {
         return next(new Error('authentication error, please run `nscm signin` or set a correct token'))
@@ -132,7 +142,9 @@ function del (name, sub, opts, callback) {
       return
     }
 
-    deletePackage(Object.assign(opts, { package: sub[0] }), callback)
+    deletePackage(Object.assign(opts, {
+      package: sub[0]
+    }), callback)
   })
 }
 
@@ -155,7 +167,7 @@ function deletePackage (opts, callback) {
       return
     }
 
-    debug(pkg, res.statusCode, JSON.stringify(res.headers, null, 2), body)
+    debug('deletePackage', pkg, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
       if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
@@ -209,7 +221,7 @@ function getWhitelist (opts, callback) {
       return
     }
 
-    debug(res.statusCode, JSON.stringify(res.headers, null, 2), body)
+    debug('getWhitelist', res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
       if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
@@ -225,8 +237,20 @@ function getWhitelist (opts, callback) {
       return
     }
 
-    opts = Object.assign(opts, { packages: body })
-    tools.checkPackages(opts, (err, results) => {
+    const pkg = {
+      dependencies: {}
+    }
+
+    if (Array.isArray(body)) {
+      body.forEach(p => {
+        pkg.dependencies[p.name] = p.version
+      })
+    }
+    opts = Object.assign(opts, {
+      package: pkg
+    })
+
+    tools.getPackages(opts, (err, results) => {
       if (err) {
         if (isCallback) return callback(err)
 
@@ -234,13 +258,18 @@ function getWhitelist (opts, callback) {
         return
       }
 
-      opts = Object.assign(opts, { packages: results })
+      opts = Object.assign(opts, {
+        packages: tools.flatten(results)
+      })
+
       const output = formatOutput(opts)
+
+      results = tools.flatten(results)
 
       if (isCallback) return callback(null, results)
 
       console.log(output)
-      console.error(`${chalk.green.bold(body.length)} packages in the whitelist\n`)
+      console.error(`${chalk.green.bold(results.length)} packages in the whitelist\n`)
     })
   })
 }
@@ -268,7 +297,9 @@ function reset (name, sub, opts, callback) {
           if (err) return handleError(err)
 
           eachLimit(whitelist, opts.concurrency, (pkg, next) => {
-            deletePackage(Object.assign(opts, { package: `${pkg.name}@${pkg.version}` }), next)
+            deletePackage(Object.assign(opts, {
+              package: `${pkg.name}@${pkg.version}`
+            }), next)
           }, err => {
             if (err) return handleError(err)
 
@@ -297,14 +328,15 @@ function start (opts, callback) {
 }
 
 function generateReport (opts, callback) {
-  const isCallback = typeof callback === 'function'
+  console.error('please wait while we process the information')
 
+  const isCallback = typeof callback === 'function'
   let uncertified = []
   let selected = []
   let all = opts.all
   let k = 0
 
-  tools.getPackages(opts, (err, packages) => {
+  tools.getPackages(opts, (err, results) => {
     if (err) {
       if (isCallback) return callback(err)
 
@@ -312,62 +344,56 @@ function generateReport (opts, callback) {
       return
     }
 
-    packages = tools.flatten(packages)
+    results = tools.flatten(results)
+    uncertified = filterUncertified(results)
 
-    tools.checkPackages(Object.assign(opts, { packages: packages }), (err, results) => {
-      if (err) {
-        if (isCallback) return callback(err)
+    if (!all) {
+      console.error(`\n${chalk.red.bold(uncertified.length)} packages aren't certified, do you want to add them to the whitelist?`)
+    }
 
-        log.panic(err.message)
-        return
-      }
-
-      uncertified = filterUncertified(results)
-
-      if (!all) {
-        console.error(`\n${chalk.red.bold(uncertified.length)} packages aren't certified, do you want to add them to the whitelist?`)
-      }
-
-      const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-      })
-
-      const askQuestion = (pkg) => {
-        let valid = true
-        let text = `${chalk.yellow('?')} add ${chalk.green.bold(pkg.name + '@' + pkg.version)} ` +
-                   `${chalk.white.dim('[y(es), n(o), a(ll)')} `
-
-        rl.question(text, (answer) => {
-          if (answer.match(/^y(es)?$/i)) {
-            selected.push(uncertified[k])
-          } else if (answer.match(/^a(ll)?$/i)) {
-            all = true
-          } else {
-            valid = answer.match(/^n(o)?$/i)
-          }
-
-          if (valid && !all) k++
-
-          if (!all && k < uncertified.length) {
-            askQuestion(uncertified[k])
-          } else {
-            rl.close()
-
-            if (all) selected = completeSelected(selected, uncertified, k)
-
-            addWhitelist(Object.assign(opts, { packages: selected }), callback)
-          }
-        })
-      }
-
-      if (all || uncertified.length < 1) {
-        rl.close()
-        addWhitelist(Object.assign(opts, { packages: uncertified }), callback)
-      } else {
-        askQuestion(uncertified[k])
-      }
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
     })
+
+    const askQuestion = (pkg) => {
+      let valid = true
+      let text = `${chalk.yellow('?')} add ${chalk.green.bold(pkg.name + '@' + pkg.version)} ` +
+        `${chalk.white.dim('[y(es), n(o), a(ll)]')} `
+
+      rl.question(text, (answer) => {
+        if (answer.match(/^y(es)?$/i)) {
+          selected.push(uncertified[k])
+        } else if (answer.match(/^a(ll)?$/i)) {
+          all = true
+        } else {
+          valid = answer.match(/^n(o)?$/i)
+        }
+
+        if (valid && !all) k++
+
+        if (!all && k < uncertified.length) {
+          askQuestion(uncertified[k])
+        } else {
+          rl.close()
+
+          if (all) selected = completeSelected(selected, uncertified, k)
+
+          addWhitelist(Object.assign(opts, {
+            packages: selected
+          }), callback)
+        }
+      })
+    }
+
+    if (all || uncertified.length < 1) {
+      rl.close()
+      addWhitelist(Object.assign(opts, {
+        packages: uncertified
+      }), callback)
+    } else {
+      askQuestion(uncertified[k])
+    }
   })
 }
 

@@ -1,5 +1,6 @@
 'use strict'
 
+const debug = require('debug')('nscm:signin')
 const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
@@ -62,6 +63,9 @@ function stripProtocol (certifiedModulesUrl) {
 
 function accessTokenReceived (error, response, info) {
   rl.close()
+
+  debug('accessTokenReceived', response.statusCode, info)
+
   if (error) {
     return console.error(`signin failed: unexpected error receiving access token: ${error}`)
   }
@@ -202,7 +206,7 @@ function hidden (query, cb) {
 
   stdin.on('data', onData)
 
-  hidden.question(query, function (value) {
+  hidden.question(query, value => {
     hidden.history = hidden.history.slice(1)
     hidden.close()
     cb(value)
