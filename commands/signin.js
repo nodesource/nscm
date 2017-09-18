@@ -131,6 +131,7 @@ function accessTokenReceived (error, response, info) {
 
     updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
     config.store.set('registry', certifiedModulesUrl)
+    console.log(`successfully logged into team: ${team.name}`)
   }
 }
 
@@ -160,7 +161,7 @@ function getUserTeam (teams, cb) {
   const prompt = teams.map((team, index) => {
     return `${index + 1}: ${team.name} (${team.role})`
   })
-  prompt.push('Enter the number of the NodeSource Team would you like to use for this session. ')
+  prompt.push('Enter the number of the NodeSource Team would you like to use for this session: ')
   rl.question(prompt.join('\n'), index => {
     rl.close()
     cb(teams[parseInt(index) - 1])
