@@ -32,6 +32,7 @@ args
   .option('production', 'Only check production', false)
   .option('concurrency', 'Concurrency of requests', config.defaults.concurrency, parseInt)
   .option('json', 'Formats the report in JSON', false)
+  .option('output', 'Save report to file', false)
   .option('dot', 'Formats the report in Graphiz dot', false)
   .option('svg', 'Formats the report in SVG', false)
   .option('github', 'Sign in using GitHub SSO', false)

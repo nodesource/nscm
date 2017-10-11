@@ -4,6 +4,7 @@ const tools = require('../lib/tools')
 const log = require('../lib/logger')
 const Table = require('cli-table')
 const Viz = require('viz.js')
+const fs = require('fs')
 
 const table = new Table({
   head: ['Package', 'Version', 'Score'],
@@ -43,6 +44,9 @@ function generateReport (opts, callback) {
     if (opts.dot || opts.svg) {
       output = generateGraphViz(packageTree, packages, opts)
       formatOutput()
+      if (opts.output) {
+        saveOutput()
+      }
       return
     }
 
@@ -58,6 +62,26 @@ function generateReport (opts, callback) {
 
     output = (opts.json) ? JSON.stringify(packages, null, 2) : table.toString()
     formatOutput()
+
+    if (opts.output) {
+      saveOutput()
+    }
+
+    function saveOutput () {
+      let t = tools.timeStamp()
+      let ext = '.json'
+      let name = 'report_' + t + ext
+      if (opts.svg || opts.svg) {
+        ext = '.svg'
+      }
+      fs.writeFile(name, output, function (err) {
+        if (err) {
+          return log.panic(err.message)
+        }
+
+        console.log(name + ' was generated and saved.')
+      })
+    }
 
     function formatOutput () {
       if (isCallback) {
