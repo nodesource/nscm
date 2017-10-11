@@ -33,6 +33,7 @@ Usage: nscm [command] [options]
     -j, --json             Formats the report in JSON (disabled by default)
     -s, --svg              Formats the report in SVG (disabled by default)
     -d, --dot              Formats the report in Graphviz DOT (disabled by default)
+    -o, --output           Save the report locally in a file (disabled by default)
     -p, --production       Only check production (disabled by default)
     -r, --registry         Certified modules registry (defaults to "")
     -t, --token            Token for registry authentication (defaults to "")
@@ -70,7 +71,8 @@ please wait while we process the information
 You can also pass `--json` to return the report in JSON format,
 `--svg` to return the report in SVG format, or
 `--dot` to return the report in [Graphviz][] DOT format.
-Use `--production` to return only `dependencies` and not `devDependencies`.
+Use `--production` to return only `dependencies` and not `devDependencies` and
+`--output` to save a file (*.json* or *.svg*) for generated report.
 
 [Graphviz]: http://www.graphviz.org/
 
