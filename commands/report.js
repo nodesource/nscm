@@ -55,7 +55,7 @@ function generateReport (opts, callback) {
         table.push([
           packages[i].name,
           packages[i].version,
-          packages[i].score || 0
+          tools.colorize(+packages[i].score || 0)
         ])
       }
     }
