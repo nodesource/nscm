@@ -24,7 +24,6 @@ test('nscm report - txt', t => {
     concurrency: 15,
     token: 'test-token',
     registry: 'https://id.registry.nodesource.test',
-    publicRegistry: 'https://registry.nodesource.test',
     cwd: path.join(__dirname, 'fixtures')
   }
 
@@ -50,7 +49,6 @@ test('nscm report - json', t => {
     concurrency: 15,
     token: 'test-token',
     registry: 'https://id.registry.nodesource.test',
-    publicRegistry: 'https://registry.nodesource.test',
     json: true,
     cwd: path.join(__dirname, 'fixtures')
   }
@@ -77,7 +75,6 @@ test('nscm report - dot', t => {
     concurrency: 15,
     token: 'test-token',
     registry: 'https://id.registry.nodesource.test',
-    publicRegistry: 'https://registry.nodesource.test',
     dot: true,
     cwd: path.join(__dirname, 'fixtures')
   }
@@ -104,7 +101,6 @@ test('nscm report - svg', t => {
     concurrency: 15,
     token: 'test-token',
     registry: 'https://id.registry.nodesource.test',
-    publicRegistry: 'https://registry.nodesource.test',
     svg: true,
     cwd: path.join(__dirname, 'fixtures')
   }

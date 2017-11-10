@@ -26,7 +26,6 @@ const opts = {
   concurrency: 15,
   token: 'test-token',
   registry: 'https://id.registry.nodesource.test',
-  publicRegistry: 'https://registry.nodesource.test',
   json: true,
   all: true,
   cwd: path.join(__dirname, 'fixtures')
