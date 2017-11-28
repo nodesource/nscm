@@ -64,15 +64,15 @@ function stripProtocol (certifiedModulesUrl) {
 function accessTokenReceived (error, response, info) {
   rl.close()
 
-  debug('accessTokenReceived', response.statusCode, info)
-
   if (error) {
-    return console.error(`signin failed: unexpected error receiving access token: ${error}`)
+    return console.error(`signin failed: unexpected error receiving access token: ${error.message}`)
   }
 
   if (response.statusCode !== 200) {
     return console.error(info)
   }
+
+  debug('accessTokenReceived', response.statusCode, info)
 
   const parsedInfo = json(info)
   if (!parsedInfo) {
