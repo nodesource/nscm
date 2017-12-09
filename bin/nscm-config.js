@@ -12,7 +12,7 @@ args
   .command('get', `Gets a configuration option ${chalk.gray('(eg: get registry)')}`, config.get, ['g'])
   .command('delete', `Deletes a configuration option ${chalk.gray('(eg: delete token)')}`, config.del, ['d'])
   .command('list', 'List all configuration options', config.list, ['l'])
-  .command('reset', 'reset all configuration options', config.reset, ['r'])
+  .command('reset', 'Reset all configuration options', config.reset, ['r'])
   .parse(process.argv, {
     usageFilter: tools.usageFilter
   })

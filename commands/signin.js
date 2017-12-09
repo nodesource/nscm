@@ -65,7 +65,7 @@ function accessTokenReceived (error, response, info) {
   rl.close()
 
   if (error) {
-    return console.error(`signin failed: unexpected error receiving access token: ${error.message}`)
+    return console.error(`The sign-in attempt failed: An unexpected error receiving the access token: ${error.message}`)
   }
 
   if (response.statusCode !== 200) {
@@ -76,7 +76,7 @@ function accessTokenReceived (error, response, info) {
 
   const parsedInfo = json(info)
   if (!parsedInfo) {
-    return console.error(`signin failed: error parsing response from ${authProxy}, info: ${info}`)
+    return console.error(`The sign-in attempt failed: An error occurred parsing the response from ${authProxy}, info: ${info}`)
   }
 
   const commentChar = '#'
@@ -84,11 +84,11 @@ function accessTokenReceived (error, response, info) {
   const teams = parsedInfo.teams
 
   if (!jwt) {
-    return console.error('signin failed: did not receive JWT')
+    return console.error('The sign-in attempt failed: We did not receive the JWT.')
   }
 
   if (!teams) {
-    return console.error('signin failed: did not receive teams')
+    return console.error('The sign-in attempt failed: We did not receive the list of teams.')
   }
 
   if (teams.length === 1) return onTeam(teams[0])
@@ -97,7 +97,7 @@ function accessTokenReceived (error, response, info) {
 
   function onTeam (team) {
     if (!team || !team.id) {
-      return console.error('post-signin config failed: invalid team.')
+      return console.error('Post-sign-in config failed: invalid team.')
     }
 
     const registry = authProxy.replace('nodesource', team.id)
@@ -116,7 +116,7 @@ function accessTokenReceived (error, response, info) {
     config.store.set('token', jwt)
 
     if (!certifiedModulesUrl) {
-      return console.error('signin failed: could not construct certifiedModulesUrl')
+      return console.error('The sign-in attempt failed: we could not construct certifiedModulesUrl.')
     }
 
     const localNpmrc = path.join(process.cwd(), '.npmrc')
@@ -131,22 +131,22 @@ function accessTokenReceived (error, response, info) {
 
     updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
     config.store.set('registry', certifiedModulesUrl)
-    console.log(`successfully logged into team: ${team.name}`)
+    console.log(`Success! You've successfully logged into the Certified Modules Team: ${team.name}`)
   }
 }
 
 function ssoAuth (connection) {
   const prompt = [
-    'a browser will launch and ask you to sign in.',
+    'Your web browser will launch and ask you to sign in.',
     '',
-    'once you have the authorization code, please enter it here: '
+    'Once you have the authorization code, please enter it here: '
   ].join('\n')
 
   const initialUrl = `https://${authDomain}/authorize?connection=${connection}&audience=${audience}&scope=${scope}&device=${device}&response_type=${responseType}&client_id=${clientId}&code_challenge=${challenge}&code_challenge_method=${codeChallengeMethod}&redirect_uri=${redirectUri}`
 
   open(initialUrl, error => {
     if (error) {
-      console.log(`open a browser and navigate to: ${encodeURI(initialUrl)}`)
+      console.log(`Please open a web browser and navigate to: ${encodeURI(initialUrl)}`)
     }
 
     rl.question(prompt, answer => exchangeAuthCodeForAccessToken(answer))
