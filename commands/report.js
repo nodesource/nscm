@@ -12,7 +12,7 @@ const table = new Table({
 })
 
 function report (name, sub, opts, callback) {
-  console.error('please wait while we process the information')
+  console.error('\nPlease patiently wait while we evaluate your Node modules...\n')
   tools.getOptions(opts, (err, opts) => {
     if (err) {
       log.panic(err.message)
@@ -33,7 +33,7 @@ function generateReport (opts, callback) {
     }
 
     if (packages && packages.error) {
-      log.panic(`${packages.error} please contact support@nodesource.com`)
+      log.panic(`${packages.error} Please contact support@nodesource.com.`)
       return
     }
 

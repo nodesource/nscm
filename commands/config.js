@@ -11,17 +11,17 @@ function set (name, sub, opts) {
   let value = sub[1]
 
   if (!key) {
-    logger.panic('Please provide a key')
+    logger.panic('Please provide a key.')
     return
   }
 
   if (!value) {
-    logger.panic('Please provide a value')
+    logger.panic('Please provide a value.')
     return
   }
 
   if (config.valid.indexOf(key) === -1) {
-    logger.panic(`${key} isn't a valid key`)
+    logger.panic(`${key} isn't a valid key.`)
     return
   }
 
@@ -36,7 +36,7 @@ function get (name, sub, opts) {
   let key = sub[0]
 
   if (!key) {
-    logger.panic('Please provide a key')
+    logger.panic('Please provide a key.')
     return
   }
 
@@ -48,7 +48,7 @@ function del (name, sub, opts) {
   let key = sub[0]
 
   if (!key) {
-    logger.panic('Please provide a key')
+    logger.panic('Please provide a key.')
     return
   }
 
@@ -80,7 +80,7 @@ function reset (name, sub, opts) {
         config.store.delete(key)
       })
 
-      console.log(`${chalk.green.bold('All configuration options were set to default values')}\n`)
+      console.log(`${chalk.green.bold('All configuration options were set to default values.')}\n`)
     }
   })
 }

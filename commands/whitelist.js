@@ -28,9 +28,9 @@ function add (name, sub, opts, callback) {
     }
 
     if (!sub[0]) {
-      if (isCallback) return callback(new Error('please provide a package name'))
+      if (isCallback) return callback(new Error('Please provide a package name.'))
 
-      log.panic('please provide a package name')
+      log.panic('Please provide a package name.')
       return
     }
 
@@ -71,7 +71,7 @@ function addWhitelist (opts, callback) {
   const isCallback = typeof callback === 'function'
 
   if (opts.packages.length === 0) {
-    const msg = 'package can\'t be resolved, please specify a valid name and version'
+    const msg = 'The package can\'t be resolved. Please specify a valid name and version.'
     if (isCallback) return callback(new Error(msg))
 
     console.log(msg)
@@ -80,7 +80,7 @@ function addWhitelist (opts, callback) {
 
   let success = []
   eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
-    debug(`adding ${pkg.name} to the whitelist`)
+    debug(`Adding ${pkg.name} to the whitelist...`)
     request({
       url: `${opts.registry}/api/v1/whitelist`,
       method: 'POST',
@@ -95,11 +95,11 @@ function addWhitelist (opts, callback) {
       debug('addWhitelist', pkg.name, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
       if (res.statusCode === 401) {
-        return next(new Error('authentication error, please run `nscm signin` or set a correct token'))
+        return next(new Error('An authentication error occurred. Please run `nscm signin` or set a correct token.'))
       }
 
       if (res.statusCode !== 200) {
-        return next(new Error(`can't add ${pkg.name} to whitelist`))
+        return next(new Error(`We are unable to add ${pkg.name} to the whitelist.`))
       }
 
       success.push(body)
@@ -120,7 +120,7 @@ function addWhitelist (opts, callback) {
     if (isCallback) return callback(null, success)
 
     console.log(output)
-    console.error(`${chalk.green.bold(opts.packages.length)} packages added to the whitelist\n`)
+    console.error(`${chalk.green.bold(opts.packages.length)} packages were added to the whitelist.\n`)
   })
 }
 
@@ -136,9 +136,9 @@ function del (name, sub, opts, callback) {
     }
 
     if (!sub[0]) {
-      if (isCallback) return callback(new Error('please provide a package name'))
+      if (isCallback) return callback(new Error('Please provide a package name.'))
 
-      log.panic('please provide a package name')
+      log.panic('Please provide a package name.')
       return
     }
 
@@ -170,22 +170,22 @@ function deletePackage (opts, callback) {
     debug('deletePackage', pkg, res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
-      if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
+      if (isCallback) return callback(new Error('An authentication error occurred. Please run `nscm signin` or set a correct token.'))
 
-      log.panic('authentication error, please run `nscm signin` or set a correct token')
+      log.panic('An authentication error occurred. Please run `nscm signin` or set a correct token.')
       return
     }
 
     if (res.statusCode !== 200) {
-      if (isCallback) return callback(new Error(`can't delete ${opts.package} from whitelist`))
+      if (isCallback) return callback(new Error(`We can't delete ${opts.package} from the whitelist.`))
 
-      log.panic(`can't delete ${opts.package} from whitelist`)
+      log.panic(`We are unable to delete ${opts.package} from the whitelist.`)
       return
     }
 
     if (isCallback) return callback()
 
-    console.error(`${chalk.green.bold(opts.package)} removed from the whitelist\n`)
+    console.error(`${chalk.green.bold(opts.package)} was removed from the whitelist.\n`)
   })
 }
 
@@ -224,16 +224,16 @@ function getWhitelist (opts, callback) {
     debug('getWhitelist', res.statusCode, JSON.stringify(res.headers, null, 2), body)
 
     if (res.statusCode === 401) {
-      if (isCallback) return callback(new Error('authentication error, please run `nscm signin` or set a correct token'))
+      if (isCallback) return callback(new Error('An authentication error occurred. Please run `nscm signin` or set a correct token.'))
 
-      log.panic('authentication error, please run `nscm signin` or set a correct token')
+      log.panic('An authentication error occurred. Please run `nscm signin` or set a correct token.')
       return
     }
 
     if (res.statusCode !== 200) {
-      if (isCallback) return callback(new Error(`can't retrieve the whitelist`))
+      if (isCallback) return callback(new Error(`We are unable to retrieve the whitelist.`))
 
-      log.panic(`can't retrieve the whitelist`)
+      log.panic(`We are unable to retrieve the whitelist.`)
       return
     }
 
@@ -269,7 +269,7 @@ function getWhitelist (opts, callback) {
       if (isCallback) return callback(null, results)
 
       console.log(output)
-      console.error(`${chalk.green.bold(results.length)} packages in the whitelist\n`)
+      console.error(`${chalk.green.bold(results.length)} packages exist in the whitelist.\n`)
     })
   })
 }
@@ -304,7 +304,7 @@ function reset (name, sub, opts, callback) {
             if (err) return handleError(err)
 
             if (isCallback) return callback(null, whitelist)
-            console.error(`${chalk.green.bold(whitelist.length)} packages removed from whitelist\n`)
+            console.error(`${chalk.green.bold(whitelist.length)} packages were removed from the whitelist.\n`)
           })
         })
       })
@@ -328,7 +328,7 @@ function start (opts, callback) {
 }
 
 function generateReport (opts, callback) {
-  console.error('please wait while we process the information')
+  console.error('Please patiently wait while we evaluate your Node modules...')
 
   const isCallback = typeof callback === 'function'
   let uncertified = []
@@ -348,7 +348,7 @@ function generateReport (opts, callback) {
     uncertified = filterUncertified(results)
 
     if (!all) {
-      console.error(`\n${chalk.red.bold(uncertified.length)} packages aren't certified, do you want to add them to the whitelist?`)
+      console.error(`\n${chalk.red.bold(uncertified.length)} packages are not certified! Do you want to add them to the whitelist?`)
     }
 
     const rl = readline.createInterface({
