@@ -40,6 +40,12 @@ function generateReport (opts, callback) {
     const packageTree = packages
     packages = tools.flatten(packages)
 
+    if (opts.certified) {
+      packages = packages.filter(p => p.score > 85)
+    } else if (opts.failed) {
+      packages = packages.filter(p => p.score <= 85)
+    }
+
     let output
     if (opts.dot || opts.svg) {
       output = generateGraphViz(packageTree, packages, opts)

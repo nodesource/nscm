@@ -32,6 +32,8 @@ args
   .option('production', 'Only check production', false)
   .option('concurrency', 'Concurrency of requests', config.defaults.concurrency, parseInt)
   .option('json', 'Formats the report in JSON', false)
+  .option('certified', 'Shows only certified packages')
+  .option('failed', 'Shows only packages that failed certification', false)
   .option('output', 'Save report to file', false)
   .option('dot', 'Formats the report in Graphiz dot', false)
   .option('svg', 'Formats the report in SVG', false)
