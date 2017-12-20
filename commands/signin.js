@@ -1,7 +1,6 @@
 'use strict'
 
 const debug = require('debug')('nscm:signin')
-const request = require('request')
 const crypto = require('crypto')
 const open = require('open')
 const readline = require('readline')
@@ -11,6 +10,8 @@ const url = require('url')
 const updateConfig = require('../lib/rc').updateConfig
 const json = require('../lib/json')
 const config = require('../lib/config')
+const tools = require('../lib/tools')
+const serverRequest = tools.serverRequest
 
 const verifier = base64URLEncode(crypto.randomBytes(32))
 const challenge = base64URLEncode(sha256(verifier))
@@ -44,16 +45,15 @@ function exchangeAuthCodeForAccessToken (authorizationCode) {
     method: 'POST',
     url: exchangeUri,
     headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
+    body: {
       grant_type: 'authorization_code',
       client_id: clientId,
       code_verifier: verifier,
       code: authorizationCode.trim(),
       redirect_uri: redirectUri
-    })
+    }
   }
-
-  request(options, accessTokenReceived)
+  serverRequest(options, accessTokenReceived)
 }
 
 function stripProtocol (certifiedModulesUrl) {
@@ -179,7 +179,7 @@ function emailAuth () {
         body: JSON.stringify({ email, password })
       }
 
-      request(options, accessTokenReceived)
+      serverRequest(options, accessTokenReceived)
     })
   })
 }

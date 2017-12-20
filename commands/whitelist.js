@@ -3,13 +3,13 @@
 const debug = require('debug')('nscm:whitelist')
 const Table = require('cli-table')
 const eachLimit = require('async.eachlimit')
-const request = require('request')
 const encodeQuery = require('querystring').encode
 const readline = require('readline')
 const npa = require('npm-package-arg')
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
+const serverRequest = tools.serverRequest
 
 const table = new Table({
   head: ['Package', 'Version', 'Score'],
@@ -81,7 +81,7 @@ function addWhitelist (opts, callback) {
   let success = []
   eachLimit(opts.packages, opts.concurrency, (pkg, next) => {
     debug(`Adding ${pkg.name} to the whitelist...`)
-    request({
+    serverRequest({
       url: `${opts.registry}/api/v1/whitelist`,
       method: 'POST',
       headers: {
@@ -153,7 +153,7 @@ function deletePackage (opts, callback) {
 
   const pkg = tools.splitPackage(opts.package)
 
-  request({
+  serverRequest({
     url: `${opts.registry}/api/v1/whitelist?${encodeQuery(pkg)}`,
     method: 'DELETE',
     headers: {
@@ -206,7 +206,7 @@ function list (name, sub, opts, callback) {
 
 function getWhitelist (opts, callback) {
   const isCallback = typeof callback === 'function'
-  request({
+  serverRequest({
     url: `${opts.registry}/api/v1/whitelist`,
     method: 'GET',
     headers: {

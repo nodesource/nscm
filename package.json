@@ -31,10 +31,12 @@
     "cli-table": "~0.3.1",
     "configstore": "^3.0.0",
     "debug": "^3.0.1",
+    "http-proxy-agent": "^2.0.0",
+    "https-proxy-agent": "^2.1.1",
     "npm-package-arg": "^5.1.2",
     "open": "0.0.5",
-    "request": "2.2.5",
-    "viz.js": "^1.8.0"
+    "viz.js": "^1.8.0",
+    "wreck": "^14.0.2"
   },
   "devDependencies": {
     "nock": "^9.0.7",
