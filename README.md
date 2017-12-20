@@ -15,29 +15,40 @@ $ npm install -g nscm
 This tool is meant to be used in the root folder of an application where the `package.json` file exists.
 
 ```
-Usage: nscm [command] [options]
+  Usage: nscm [command] [options]
 
   Commands:
 
-    config, c     Configure nscm options
-    help          Display help
-    report, r     Get a report of your packages
-    whitelist, w  Whitelist your packages
-    signin, s     Sign into nscm via email (--github or --google for SSO)
-    signout, o    Sign out of nscm
+    config, c           Configure nscm options
+    help                Display help
+    report, r           Get a report of your packages
+    signin, s, login    Sign in to nscm
+    signout, o, logout  Sign out of nscm
+    whitelist, w        Whitelist your packages
 
   Options:
 
+    -C, --certified        Shows only certified packages
     -c, --concurrency <n>  Concurrency of requests (defaults to 15)
+    -d, --dot              Formats the report in Graphiz dot (disabled by default)
+    -f, --failed           Shows only packages that failed certification (disabled by default)
+    -g, --github           Sign in using GitHub SSO (disabled by default)
+    -G, --google           Sign in using Google SSO (disabled by default)
     -h, --help             Output usage information
     -j, --json             Formats the report in JSON (disabled by default)
-    -s, --svg              Formats the report in SVG (disabled by default)
-    -d, --dot              Formats the report in Graphviz DOT (disabled by default)
-    -o, --output           Save the report locally in a file (disabled by default)
+    -o, --output           Save report to file (disabled by default)
     -p, --production       Only check production (disabled by default)
     -r, --registry         Certified modules registry (defaults to "")
+    -s, --svg              Formats the report in SVG (disabled by default)
     -t, --token            Token for registry authentication (defaults to "")
     -v, --version          Output the version number
+
+  Additional Help
+
+    Add -h to the 'config' or 'whitelist' commands for additional help concerning those commands.
+
+    nscm config -h
+    nscm whitelist -h
 ```
 
 ## `nscm report` (default)
@@ -73,6 +84,10 @@ You can also pass `--json` to return the report in JSON format,
 `--dot` to return the report in [Graphviz][] DOT format.
 Use `--production` to return only `dependencies` and not `devDependencies` and
 `--output` to save a file (*.json* or *.svg*) for generated report.
+
+If you want to filter the output you can use
+`--certified` to show only certified packages or
+`--failed` to show only packages that failed certification.
 
 [Graphviz]: http://www.graphviz.org/
 
