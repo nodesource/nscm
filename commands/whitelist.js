@@ -9,6 +9,7 @@ const npa = require('npm-package-arg')
 const chalk = require('chalk')
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
+const config = require('../lib/config')
 const serverRequest = tools.serverRequest
 
 const table = new Table({
@@ -419,7 +420,7 @@ function formatOutput (opts) {
 
 function filterUncertified (pkgs) {
   return pkgs.filter((pkg) => {
-    return !pkg.score || pkg.score <= 85 // define the threshold
+    return !pkg.score || pkg.score <= config.score
   })
 }
 

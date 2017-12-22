@@ -2,6 +2,7 @@
 
 const tools = require('../lib/tools')
 const log = require('../lib/logger')
+const config = require('../lib/config')
 const Table = require('cli-table')
 const Viz = require('viz.js')
 const fs = require('fs')
@@ -41,9 +42,9 @@ function generateReport (opts, callback) {
     packages = tools.flatten(packages)
 
     if (opts.certified) {
-      packages = packages.filter(p => p.score > 85)
+      packages = packages.filter(p => p.score > config.score)
     } else if (opts.failed) {
-      packages = packages.filter(p => p.score <= 85)
+      packages = packages.filter(p => p.score <= config.score)
     }
 
     let output
@@ -148,7 +149,7 @@ function generateGraphViz (packagesTree, scores, opts) {
       color = '#CFCFCF'
     } else if (score === 100) {
       color = '#9FFF9F'
-    } else if (score > 85) {
+    } else if (score > config.score) {
       color = '#FFFF7F'
     } else {
       color = '#FF9F9F'

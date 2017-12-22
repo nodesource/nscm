@@ -8,11 +8,13 @@ const tools = require('../lib/tools')
 
 // Commands
 const report = require('../commands/report')
+const verify = require('../commands/verify')
 const signin = require('../commands/signin')
 const signout = require('../commands/signout')
 
 const commands = [
   'report',
+  'verify',
   'whitelist',
   'config',
   'signin',
@@ -40,6 +42,7 @@ args
   .option('github', 'Sign in using GitHub SSO', false)
   .option('google', 'Sign in using Google SSO', false)
   .command('report', 'Get a report of your packages', report, ['r'])
+  .command('verify', 'Verify if all packages are certified', verify)
   .command('whitelist', 'Whitelist your packages', ['w'])
   .command('config', 'Configure nscm options', ['c'])
   .command('signin', 'Sign in to nscm', signin, ['s', 'login'])
