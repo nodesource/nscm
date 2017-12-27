@@ -24,6 +24,7 @@ This tool is meant to be used in the root folder of an application where the `pa
     report, r           Get a report of your packages
     signin, s, login    Sign in to nscm
     signout, o, logout  Sign out of nscm
+    verify              Verify if all packages are certified
     whitelist, w        Whitelist your packages
 
   Options:
