@@ -8,7 +8,6 @@ const path = require('path')
 const os = require('os')
 const url = require('url')
 const updateConfig = require('../lib/rc').updateConfig
-const json = require('../lib/json')
 const config = require('../lib/config')
 const tools = require('../lib/tools')
 const serverRequest = tools.serverRequest
@@ -74,14 +73,13 @@ function accessTokenReceived (error, response, info) {
 
   debug('accessTokenReceived', response.statusCode, info)
 
-  const parsedInfo = json(info)
-  if (!parsedInfo) {
+  if (!info) {
     return console.error(`The sign-in attempt failed: An error occurred parsing the response from ${authProxy}, info: ${info}`)
   }
 
   const commentChar = '#'
-  const jwt = parsedInfo.jwt
-  const teams = parsedInfo.teams
+  const jwt = info.jwt
+  const teams = info.teams
 
   if (!jwt) {
     return console.error('The sign-in attempt failed: We did not receive the JWT.')

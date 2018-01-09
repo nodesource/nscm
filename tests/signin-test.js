@@ -82,14 +82,14 @@ test('signin', t => {
     },
     '../lib/tools': {
       serverRequest: (options, accessTokenReceived) => {
-        accessTokenReceived(null, { statusCode: 200 }, JSON.stringify({
+        accessTokenReceived(null, { statusCode: 200 }, {
           jwt,
           teams: [{
             id: '35dbd13d-81a2-4b1b-94df-7c06151ec21f',
             name: 'test',
             role: 'member'
           }]
-        }))
+        })
       }
     },
     '../lib/rc': {
