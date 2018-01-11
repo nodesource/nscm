@@ -7,19 +7,18 @@ environment_variables:
 phases:
   build:
     commands:
-      - /bin/bash /usr/local/nvm/nvm.sh
       # Test Carbon
-      - nvm use 8
+      - . /root/.bashrc && nvm use 8
       - npm install
       - npm run lint
       - npm run test
       # Test Boron
-      - nvm use 6
+      - . /root/.bashrc && nvm use 6
       - npm install
       - npm run lint
       - npm run test
       # Test Argon
-      - nvm use 4
+      - . /root/.bashrc && nvm use 4
       - npm install
       - npm run lint
       - npm run test
