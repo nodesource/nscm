@@ -7,6 +7,7 @@ environment_variables:
 phases:
   build:
     commands:
+      - /bin/bash /usr/local/nvm/nvm.sh
       # Test Carbon
       - nvm use 8
       - npm install
