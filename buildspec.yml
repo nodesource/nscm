@@ -8,22 +8,16 @@ phases:
   build:
     commands:
       # Test Carbon
-      - export NODE_PATH="/usr/local/nvm/versions/node/v8.9.4/lib/node_modules"
-      - export PATH="/usr/local/nvm/versions/node/v8.9.4/bin:$PATH"
       - . /usr/local/nvm/nvm.sh && nvm use 8
       - npm install
       - npm run lint
       - npm run test
       # Test Boron
-      - export NODE_PATH="/usr/local/nvm/versions/node/v6.12.3/lib/node_modules"
-      - export PATH="/usr/local/nvm/versions/node/v6.12.3/bin:$PATH"
       - . /usr/local/nvm/nvm.sh && nvm use 6
       - npm install
       - npm run lint
       - npm run test
       # Test Argon
-      - export NODE_PATH="/usr/local/nvm/versions/node/v4.8.7/lib/node_modules"
-      - export PATH="/usr/local/nvm/versions/node/v4.8.7/bin:$PATH"
       - . /usr/local/nvm/nvm.sh && nvm use 4
       - npm install
       - npm run lint
