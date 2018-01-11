@@ -1,0 +1,12 @@
+version: 0.2
+
+environment_variables:
+  plaintext:
+    NS_ENV: "ci"
+
+phases:
+  build:
+    commands:
+      - npm install
+      - npm run lint
+      - npm run test
