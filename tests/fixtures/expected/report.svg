@@ -503,7 +503,7 @@
 <g id="node31" class="node">
 <title>es&#45;abstract@1.7.0</title>
 <g id="a_node31"><a xlink:href="https://platform.nodesource.io/registry?name=es-abstract&amp;version=1.7.0" xlink:title="es&#45;abstract @ 1.7.0 &#45; score: 100%">
-<polygon fill="#9fff9f" stroke="#000000" points="655.9104,-167 554.908,-167 554.908,-111 655.9104,-111 655.9104,-167"/>
+<polygon fill="#9fff9f" stroke="#000000" points="656.4104,-167 554.408,-167 554.408,-111 656.4104,-111 656.4104,-167"/>
 <text text-anchor="start" x="562.6592" y="-146" font-family="Times,serif" font-size="20.00" fill="#000000">es&#45;abstract</text>
 <text text-anchor="start" x="562.6592" y="-131.4" font-family="Times,serif" font-size="14.00" fill="#000000">1.7.0</text>
 <text text-anchor="start" x="562.6592" y="-117.4" font-family="Times,serif" font-size="14.00" fill="#000000">score: 100%</text>
@@ -513,8 +513,8 @@
 <!-- string.prototype.trim@1.1.2&#45;&gt;es&#45;abstract@1.7.0 -->
 <g id="edge29" class="edge">
 <title>string.prototype.trim@1.1.2&#45;&gt;es&#45;abstract@1.7.0</title>
-<path fill="none" stroke="#000000" d="M492.8893,-169.4758C510.494,-164.7076 528.5445,-159.8186 544.8902,-155.3914"/>
-<polygon fill="#000000" stroke="#000000" points="546.091,-158.6924 554.8282,-152.6997 544.261,-151.9358 546.091,-158.6924"/>
+<path fill="none" stroke="#000000" d="M492.8893,-169.4758C510.4064,-164.7313 528.3649,-159.8673 544.6461,-155.4576"/>
+<polygon fill="#000000" stroke="#000000" points="545.8106,-158.7683 554.5478,-152.7757 543.9806,-152.0118 545.8106,-158.7683"/>
 </g>
 <!-- foreach@2.0.5 -->
 <g id="node29" class="node">

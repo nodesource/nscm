@@ -32,6 +32,12 @@ test('nscm report - txt', t => {
 
   report(['report', 'r'], [], opts, (err, output) => {
     t.ifErr(err, 'it should not fail')
+
+    // strip ANSI out of output
+    /* eslint-disable no-control-regex */
+    output = output.replace(/\x1b.*?m/g, '')
+    /* eslint-enable no-control-regex */
+
     t.equal(expected.trim(), output, 'report should be the same')
     t.end()
 
