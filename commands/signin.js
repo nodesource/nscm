@@ -10,6 +10,7 @@ const url = require('url')
 const updateConfig = require('../lib/rc').updateConfig
 const config = require('../lib/config')
 const tools = require('../lib/tools')
+const { postEmailSignIn, fetchUserDetails } = require('../lib/api')
 const serverRequest = tools.serverRequest
 
 const verifier = base64URLEncode(crypto.randomBytes(32))
@@ -133,6 +134,58 @@ function accessTokenReceived (error, response, info) {
   }
 }
 
+const validateAccountSession = async response => {
+  rl.close()
+
+  debug('validateAccountSession', response)
+
+  const user = await fetchUserDetails(response.session)
+  let { orgs } = user
+  orgs = Object.values(orgs)
+
+  const onOrg = org => {
+    if (!org || !org.name) {
+      return console.error('Post-sign-in config failed: invalid org.')
+    }
+
+    const registry = authProxy.replace('nodesource', org.id)
+    const certifiedModulesUrl = `https://${registry}`
+
+    const globalNpmrc = path.join(os.homedir(), '.npmrc')
+    const authTokenKey = stripProtocol(certifiedModulesUrl) + ':_authToken'
+    const jwt = response.session
+    const commentChar = '#'
+
+    // filter out any lines that might conflict,
+    // then add a new line containing the latest jwt
+    const onGlobalConfigParsed = (parsedConfig) => parsedConfig
+      .filter(line => line.key !== authTokenKey)
+      .concat({ key: authTokenKey, value: jwt, comment: false })
+
+    updateConfig(globalNpmrc, commentChar, onGlobalConfigParsed)
+    config.store.set('token', jwt)
+
+    const localNpmrc = path.join(process.cwd(), '.npmrc')
+
+    // filter out any lines that might conflict,
+    // comment out any existing lines that point to other registries,
+    // then add a new line pointing to the current registry
+    const onLocalConfigParsed = (parsedConfig) => parsedConfig
+      .filter(line => line.key !== 'registry' && line.value !== certifiedModulesUrl)
+      .map(line => line.key === 'registry' ? { key: line.key, value: line.value, comment: true } : line)
+      .concat({ key: 'registry', value: certifiedModulesUrl, comment: false })
+
+    updateConfig(localNpmrc, commentChar, onLocalConfigParsed)
+    config.store.set('registry', certifiedModulesUrl)
+
+    console.log(`Success! You've successfully logged into the organization: ${org.name}`)
+  }
+
+  if (orgs.length === 1) return onOrg(orgs[0])
+
+  getUserOrg(orgs, onOrg)
+}
+
 function ssoAuth (connection) {
   const prompt = [
     'Your web browser will launch and ask you to sign in.',
@@ -166,18 +219,35 @@ function getUserTeam (teams, cb) {
   })
 }
 
+const getUserOrg = (orgs, cb) => {
+  rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+  const prompt = orgs.map((org, index) => {
+    return `${index + 1}: ${org.name} (${org.roles.toString()})`
+  })
+  prompt.push('Enter the number of the NodeSource org would you like to use for this session: ')
+  rl.question(prompt.join('\n'), index => {
+    rl.close()
+    cb(orgs[parseInt(index) - 1])
+  })
+}
+
 function emailAuth () {
   rl.question('email: ', email => {
     rl.close()
-    hidden('password: ', password => {
-      const options = {
-        method: 'POST',
-        url: `https://${authProxy}/-/signin`,
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+    hidden('password: ', async password => {
+      try {
+        const res = await postEmailSignIn({
+          email,
+          password,
+          product: 'ncm-desktop'
+        })
+        await validateAccountSession(res)
+      } catch (err) {
+        console.error(err.body)
       }
-
-      serverRequest(options, accessTokenReceived)
     })
   })
 }
